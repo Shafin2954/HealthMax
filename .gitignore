@@ -1,0 +1,49 @@
+# HealthMax — .gitignore
+
+# Environment & secrets
+.env
+*.pem
+gcp-key.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Raw datasets (too large for git; stored in S3)
+data/raw/
+
+# Trained model artifacts (stored in S3; regenerated locally)
+models/disease_rag.index
+models/disease_records.json
+models/disease_classifier.json
+models/symptom_binarizer.json
+models/disease_label_encoder.json
+
+# Cleaned data outputs
+data/dgda_medicines_clean.csv
+
+# Notebook outputs
+notebooks/.ipynb_checkpoints/
+
+# Dialect test audio files (binary)
+tests/dialect_test_audio/
+
+# TTS test output
+backend/test_tts_output.mp3
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# Logs
+*.log

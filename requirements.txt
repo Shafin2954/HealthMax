@@ -1,0 +1,58 @@
+# HealthMax — Python Dependencies
+# Install with: pip install -r requirements.txt
+# Python >= 3.10 required.
+
+# ---------------------------------------------------------------------------
+# Web framework & server
+# ---------------------------------------------------------------------------
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+python-multipart==0.0.9     # For file uploads (audio)
+twilio==9.2.1               # WhatsApp / SMS webhook
+
+# ---------------------------------------------------------------------------
+# ML / NLP core
+# ---------------------------------------------------------------------------
+torch==2.3.0                # PyTorch — CPU build; for GPU on EC2 use torch+cu118
+transformers==4.41.0        # HuggingFace Transformers (BanglaBERT, Whisper)
+datasets==2.19.2            # HuggingFace Datasets (for NER fine-tuning)
+tokenizers==0.19.1
+sentence-transformers==3.0.1 # paraphrase-multilingual-MiniLM embeddings
+faiss-cpu==1.8.0            # FAISS vector store (use faiss-gpu on GPU instance)
+xgboost==2.0.3              # Disease classifier
+scikit-learn==1.5.0         # Preprocessing, evaluation metrics
+pandas==2.2.2
+numpy==1.26.4
+rapidfuzz==3.9.0            # Fuzzy matching for symptom normalization
+
+# ---------------------------------------------------------------------------
+# ASR / Audio
+# ---------------------------------------------------------------------------
+librosa==0.10.2             # Audio loading & preprocessing for Whisper
+soundfile==0.12.1           # Audio I/O
+
+# ---------------------------------------------------------------------------
+# LLM APIs
+# ---------------------------------------------------------------------------
+openai==1.30.5              # GPT-4o API
+boto3==1.34.120             # Amazon Bedrock (Claude Haiku fallback)
+
+# ---------------------------------------------------------------------------
+# TTS (FLEX)
+# ---------------------------------------------------------------------------
+google-cloud-texttospeech==2.17.0
+
+# ---------------------------------------------------------------------------
+# Utilities
+# ---------------------------------------------------------------------------
+python-dotenv==1.0.1        # Load .env file for environment variables
+httpx==0.27.0               # Async HTTP client (used internally by openai)
+pydantic==2.7.1             # Data validation (FastAPI models)
+tqdm==4.66.4                # Progress bars for data processing
+
+# ---------------------------------------------------------------------------
+# Testing
+# ---------------------------------------------------------------------------
+pytest==8.2.2
+pytest-asyncio==0.23.7
+httpx==0.27.0               # TestClient for FastAPI

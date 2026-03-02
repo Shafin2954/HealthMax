@@ -1,0 +1,51 @@
+id,input_bn,expected_urgency,notes
+1,বুকে ব্যথা, শ্বাস কষ্ট,EMERGENCY,Cardiac emergency — rule must override to EMERGENCY
+2,তিন দিন জ্বর, মাথাব্যথা, চোখ লাল, গা ব্যথা,URGENT,Dengue / Typhoid presentation
+3,পেটব্যথা, বমি, পাতলা পায়খানা,URGENT,Gastroenteritis
+4,হাত পা কাঁপছে, ঘাম হচ্ছে, মাথা ঘুরছে,URGENT,Hypoglycemia
+5,গলা ব্যথা, সর্দি, হালকা জ্বর,SELF-CARE,Upper respiratory — no danger signs
+6,অজ্ঞান হয়ে গেছে,EMERGENCY,Loss of consciousness
+7,খিঁচুনি হচ্ছে,EMERGENCY,Seizure
+8,সাপে কেটেছে,EMERGENCY,Snakebite
+9,প্রচুর রক্ত পড়ছে,EMERGENCY,Heavy bleeding
+10,শিশুর তীব্র জ্বর এবং খিঁচুনি,EMERGENCY,Febrile seizure in infant
+11,দুই দিন ধরে পাতলা পায়খানা, একটু দুর্বল,URGENT,Diarrhea with weakness — dehydration risk
+12,বুক ব্যাথা, ঘাম হচ্ছে,EMERGENCY,Possible MI
+13,মাথায় আঘাত পেয়েছে, মাথা ঘুরছে,URGENT,Head trauma
+14,হালকা কাশি, নাক দিয়ে পানি পড়ছে,SELF-CARE,Common cold
+15,বমিতে রক্ত,EMERGENCY,Hematemesis — upper GI bleed
+16,পায়খানায় রক্ত,URGENT,Lower GI bleed
+17,চোখ হলুদ, প্রস্রাব হলুদ,URGENT,Jaundice / Hepatitis
+18,হাঁটু ব্যথা, কিছুদিন ধরে,SELF-CARE,Chronic knee pain — non-emergency
+19,তীব্র পেট ব্যথা, বমি হচ্ছে,URGENT,Acute abdomen
+20,শ্বাস নিতে পারছি না,EMERGENCY,Respiratory distress
+21,ডায়াবেটিস আছে, অনেক দুর্বল,URGENT,Diabetic complication
+22,জলে পড়ে যাওয়ার পরে শ্বাস কষ্ট,EMERGENCY,Near-drowning
+23,গলা ফুলে গেছে, শ্বাস নিতে কষ্ট,EMERGENCY,Anaphylaxis / angioedema
+24,মুখ বাঁকা হয়ে গেছে, কথা জড়িয়ে যাচ্ছে,EMERGENCY,Stroke signs
+25,হাত অবশ হয়ে গেছে,URGENT,Neurological — could be TIA or pressure
+26,বিষ খেয়েছে,EMERGENCY,Poisoning
+27,পোকার কামড়, ফুলে গেছে,URGENT,Insect sting with swelling
+28,কুকুরে কামড়েছে,EMERGENCY,Rabies exposure — immediate care
+29,কানে ব্যথা,SELF-CARE,Ear pain without danger signs
+30,পিঠে ব্যথা, কয়েকদিন ধরে,SELF-CARE,Low back pain — chronic
+31,ঘুমাতে পারছি না, মন খারাপ,SELF-CARE,Mental health — non-emergency unless suicidal ideation
+32,গর্ভবতী, প্রচণ্ড পেটব্যথা,EMERGENCY,Obstetric emergency
+33,চোখে ব্যথা, দেখতে পাচ্ছি না,URGENT,Visual disturbance
+34,কাশিতে রক্ত,URGENT,Hemoptysis — TB / pneumonia concern
+35,হঠাৎ মাথাব্যথা, সবচেয়ে খারাপ,EMERGENCY,Thunderclap headache — SAH
+36,উচ্চ রক্তচাপ, মাথাব্যথা,URGENT,Hypertensive urgency
+37,বাচ্চা খাচ্ছে না, কান্না থামছে না,URGENT,Unwell infant — needs evaluation
+38,জ্বর ৩ দিন, চোখ লাল, গায়ে র‍্যাশ,URGENT,Dengue suspect — Day 3
+39,ঠান্ডা লেগেছে, গলা ব্যথা,SELF-CARE,Common cold — self-care
+40,গা চুলকাচ্ছে, র‍্যাশ,SELF-CARE,Pruritus / rash without danger signs
+41,বুক ধড়ফড় করছে,URGENT,Palpitations — cardiac evaluation needed
+42,প্রস্রাবে জ্বালা, ঘন ঘন প্রস্রাব,SELF-CARE,UTI — outpatient treatment
+43,পেটে গ্যাস, বদহজম,SELF-CARE,Dyspepsia
+44,ব্রণ, মুখে দাগ,SELF-CARE,Acne — cosmetic concern
+45,দাঁতে ব্যথা,SELF-CARE,Dental pain — refer to dentist
+46,পা ভেঙেছে সম্ভবত, অনেক ব্যথা,URGENT,Suspected fracture
+47,জ্বর নেই কিন্তু পেটব্যথা আছে ৫ দিন ধরে,URGENT,Chronic abdomen pain — needs evaluation
+48,মাথা ঘুরছে, বমি বমি ভাব,URGENT,Vertigo / early dehydration
+49,শিশুর বমি ও পাতলা পায়খানা, দুর্বল,URGENT,Pediatric gastroenteritis — dehydration risk
+50,নিঃশ্বাস বন্ধ হয়ে গেছে,EMERGENCY,Respiratory arrest
