@@ -12,6 +12,10 @@ Bangla Dialect: https://data.mendeley.com/datasets/6fv9dbh5kr/3
 
 MedER Bangla Medical entity recognition: https://data.mendeley.com/datasets/jt4gywvwtj/2
 
+2nd Priority: Medicine
+
+3rd Priority: https://www.openslr.org/37/ -- Openslr Bangla Speech
+
 
 
 
