@@ -1,283 +1,136 @@
-"""
-HealthMax — Layer 7: LLM Response Generator
-Generates a structured natural-language Bangla triage response
-using GPT-4o (primary) or Amazon Bedrock Claude Haiku (fallback).
-
-Output format (always):
-    ✅ সম্ভাব্য রোগ: <top 3>
-    🚨 জরুরি মাত্রা: <EMERGENCY | URGENT | SELF-CARE>
-    🏥 পরামর্শিত সুবিধা: <facility instruction>
-    💊 ওষুধ: <generic medicines with prices>
-    📋 স্বাস্থ্যকর্মীর নির্দেশনা: <CHW action>
-    ⚠️  এটি পরামর্শ, ডাক্তারের বিকল্প নয়।
-
-Collaborator instructions:
-    - Set OPENAI_API_KEY and BEDROCK_REGION environment variables.
-    - Always append the DISCLAIMER constant at the end of every response.
-    - Never let the LLM generate urgency if the rule engine has already set it — pass urgency as context.
-    - If GPT-4o fails, automatically fall back to Bedrock Claude Haiku.
-    - Keep max_tokens at 400 — responses must be concise for WhatsApp formatting.
-"""
-
-import logging
 import os
-from typing import Optional
+from typing import List, Dict
+from dotenv import load_dotenv
 
-logger = logging.getLogger("healthmax.generator")
+load_dotenv()
 
-# ---------------------------------------------------------------------------
-# Constants
-# ---------------------------------------------------------------------------
 
-DISCLAIMER = "⚠️ এটি পরামর্শ, ডাক্তারের বিকল্প নয়।"
-MAX_TOKENS = 400
-TEMPERATURE = 0.3   # Low temperature for medical responses — reduce hallucination risk
-OPENAI_MODEL = "gpt-4o"
-BEDROCK_MODEL_ID = "anthropic.claude-haiku-20240307-v1:0"
-BEDROCK_REGION = os.environ.get("BEDROCK_REGION", "us-east-1")
+SYSTEM_PROMPT = """আপনি HealthMax — একটি বাংলা স্বাস্থ্য তথ্য সহায়তা ব্যবস্থা।
+আপনার কাজ হলো কমিউনিটি স্বাস্থ্যকর্মী (CHW) এবং গ্রামীণ রোগীদের তাদের উপসর্গ অনুযায়ী সহজ ভাষায় স্বাস্থ্য পরামর্শ দেওয়া।
 
-# ---------------------------------------------------------------------------
-# Prompt builder
-# ---------------------------------------------------------------------------
+নিয়মাবলী:
+1. সবসময় বাংলায় উত্তর দিন
+2. সহজ ও স্পষ্ট ভাষা ব্যবহার করুন — গ্রামের মানুষ বুঝতে পারবেন এমন
+3. সবসময় শেষে লিখুন: "⚠️ এটি পরামর্শ, ডাক্তারের বিকল্প নয়।"
+4. জরুরি অবস্থায় সবসময় ৯৯৯ কল করার পরামর্শ দিন
+5. কখনো নিশ্চিত রোগ নির্ণয় করবেন না — শুধু সম্ভাব্য বলুন"""
 
-def build_prompt(
-    text: str,
-    entities: dict,
-    retrieved: list,
-    top_diseases: list,
-    urgency: str,
-    facility: str,
-    drugs: list,
+
+async def generate_response(
+    input_text: str,
+    symptoms: List[str],
+    ner_entities: Dict,
+    triage_decision: Dict,
+    drug_recommendations: List[Dict],
+    rag_results: List[Dict]
 ) -> str:
     """
-    Build the structured Bangla triage prompt for the LLM.
-
-    The prompt explicitly instructs the model:
-        - To respond ONLY in Bangla.
-        - NOT to change the urgency level (it is pre-determined by the rule engine).
-        - To follow the exact output format.
-        - To append the disclaimer.
-
-    Args:
-        text:         Original Bangla symptom text from the user.
-        entities:     NER output dict.
-        retrieved:    Top-5 RAG retrieved disease records.
-        top_diseases: XGBoost top-3 disease predictions.
-        urgency:      Final urgency level from the rule engine.
-        facility:     Facility recommendation from the rule engine.
-        drugs:        Drug lookup results from DGDA.
-
-    Returns:
-        Complete prompt string to send to the LLM.
+    Generate a natural Bangla triage response using GPT-4o.
+    Falls back to Amazon Bedrock Claude Haiku if GPT-4o is unavailable.
+    Falls back to template response if both fail.
     """
-    symptoms_str = "، ".join(entities.get("symptoms", [])) or "অনির্দিষ্ট"
-    diseases_str = "\n".join(
-        f"- {d['name']} ({d['probability']:.0%})" for d in top_diseases
-    ) or "- তথ্য অপর্যাপ্ত"
-    retrieved_str = "\n".join(
-        f"- {r.get('disease_name', '')}" for r in retrieved[:3]
-    ) or "- N/A"
-    drugs_str = "\n".join(
-        f"- {d['generic_name']} ({d['brand_example']}) — ৳{d['price_bdt']}/{d['unit']}"
-        for d in drugs
-    ) or "- প্রযোজ্য নয়"
+    # Build context for the prompt
+    diseases_text = "\n".join([
+        f"- {d['disease']} ({d['probability']:.0%})"
+        for d in triage_decision.get("top_diseases", [])[:3]
+    ]) or "নির্ধারণ সম্ভব হয়নি"
 
-    prompt = f"""তুমি HealthMax — একটি বাংলাদেশের গ্রামীণ স্বাস্থ্য ট্রিয়াজ সহকারী।
-তোমাকে নিচের তথ্য দেওয়া হয়েছে। শুধুমাত্র বাংলায়, নির্দিষ্ট ফরম্যাটে উত্তর দাও।
+    drugs_text = "\n".join([
+        f"- {d['generic_name']} ({d['brand_example']}) — ৳{d['price_bdt']} প্রতি {d['unit']} {d.get('affordable_label','')}"
+        for d in drug_recommendations[:2]
+    ]) or "ডাক্তারের পরামর্শ অনুযায়ী ওষুধ নিন"
 
-রোগীর বর্ণনা: {text}
-শনাক্ত লক্ষণ: {symptoms_str}
+    user_prompt = f"""
+রোগীর উপসর্গ: {input_text}
 
-সম্ভাব্য রোগ (AI বিশ্লেষণ):
-{diseases_str}
+শনাক্ত উপসর্গ: {', '.join(symptoms) if symptoms else 'কোনো উপসর্গ শনাক্ত হয়নি'}
 
-তথ্যভান্ডার থেকে মিলে যাওয়া রোগ:
-{retrieved_str}
+সম্ভাব্য রোগ:
+{diseases_text}
 
-জরুরি মাত্রা (নিয়ম অনুযায়ী নির্ধারিত — পরিবর্তন করবে না): {urgency}
-পরামর্শিত সুবিধা: {facility}
+জরুরি মাত্রা: {triage_decision.get('urgency_label_bn', 'জরুরি')}
+প্রস্তাবিত স্বাস্থ্যসেবা কেন্দ্র: {triage_decision.get('facility', 'উপজেলা স্বাস্থ্য কমপ্লেক্স')}
 
-প্রস্তাবিত ওষুধ (DGDA):
-{drugs_str}
+প্রস্তাবিত ওষুধ:
+{drugs_text}
 
-এখন নিচের ফরম্যাটে সম্পূর্ণ বাংলায় উত্তর দাও:
+উপরের তথ্যের ভিত্তিতে রোগী বা CHW-কে একটি সংক্ষিপ্ত, স্পষ্ট পরামর্শ দিন।
+"""
 
-✅ সম্ভাব্য রোগ: [শীর্ষ ৩টি রোগের নাম]
-🚨 জরুরি মাত্রা: {urgency}
-🏥 পরামর্শিত সুবিধা: {facility}
-💊 ওষুধ: [ওষুধের নাম ও দাম]
-📋 স্বাস্থ্যকর্মীর নির্দেশনা: [সংক্ষিপ্ত নির্দেশনা]
-{DISCLAIMER}
+    # Try GPT-4o first
+    openai_key = os.getenv("OPENAI_API_KEY", "")
+    if openai_key and openai_key != "your_openai_key_here":
+        try:
+            return await _call_openai(user_prompt)
+        except Exception as e:
+            print(f"[Generator] GPT-4o failed: {e}. Trying Bedrock...")
 
-গুরুত্বপূর্ণ: জরুরি মাত্রা পরিবর্তন করবে না। সর্বোচ্চ ৪০০ শব্দে উত্তর দাও।"""
-
-    return prompt
-
-
-# ---------------------------------------------------------------------------
-# LLM call — GPT-4o (primary)
-# ---------------------------------------------------------------------------
-
-def call_openai(prompt: str) -> Optional[str]:
-    """
-    Call OpenAI GPT-4o to generate the triage response.
-
-    TODO (collaborator):
-        1. import openai
-        2. Set openai.api_key from OPENAI_API_KEY env var.
-        3. Call openai.chat.completions.create(model=OPENAI_MODEL, messages=[...],
-           max_tokens=MAX_TOKENS, temperature=TEMPERATURE)
-        4. Return response.choices[0].message.content
-        5. Catch openai.RateLimitError, openai.APIError → return None to trigger fallback.
-    """
-    api_key = os.environ.get("OPENAI_API_KEY")
-    if not api_key:
-        logger.info("OPENAI_API_KEY not set; skipping GPT-4o.")
-        return None
-
+    # Try Amazon Bedrock Claude Haiku
     try:
-        import openai  # type: ignore
-        client = openai.OpenAI(api_key=api_key)
-        response = client.chat.completions.create(
-            model=OPENAI_MODEL,
-            messages=[
-                {"role": "system", "content": "তুমি একটি বাংলা স্বাস্থ্য ট্রিয়াজ সহকারী। সবসময় বাংলায় উত্তর দাও।"},
-                {"role": "user", "content": prompt},
-            ],
-            max_tokens=MAX_TOKENS,
-            temperature=TEMPERATURE,
-        )
-        return response.choices[0].message.content
+        return await _call_bedrock(user_prompt)
     except Exception as e:
-        logger.warning("GPT-4o call failed: %s", e)
-        return None
+        print(f"[Generator] Bedrock also failed: {e}. Using template response.")
+
+    # Template fallback
+    return _template_response(triage_decision, drug_recommendations)
 
 
-# ---------------------------------------------------------------------------
-# LLM call — Amazon Bedrock Claude Haiku (fallback)
-# ---------------------------------------------------------------------------
+async def _call_openai(user_prompt: str) -> str:
+    from openai import AsyncOpenAI
+    client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    response = await client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_prompt}
+        ],
+        max_tokens=500,
+        temperature=0.3
+    )
+    return response.choices[0].message.content.strip()
 
-def call_bedrock(prompt: str) -> Optional[str]:
-    """
-    Call Amazon Bedrock Claude Haiku as LLM fallback.
 
-    TODO (collaborator):
-        1. import boto3
-        2. Create bedrock_runtime client in BEDROCK_REGION.
-        3. Use client.invoke_model() with the correct Anthropic Claude Haiku body schema.
-        4. Parse response body JSON to extract the generated text.
-        5. Return the text, or None on failure.
-    """
-    try:
-        import boto3  # type: ignore
-        import json
+async def _call_bedrock(user_prompt: str) -> str:
+    import boto3
+    import json as _json
 
-        client = boto3.client("bedrock-runtime", region_name=BEDROCK_REGION)
-        body = json.dumps({
+    client = boto3.client("bedrock-runtime", region_name=os.getenv("AWS_REGION", "us-east-1"))
+    full_prompt = f"{SYSTEM_PROMPT}\n\nHuman: {user_prompt}\n\nAssistant:"
+
+    response = client.invoke_model(
+        modelId="anthropic.claude-haiku-20240307-v1:0",
+        contentType="application/json",
+        accept="application/json",
+        body=_json.dumps({
             "anthropic_version": "bedrock-2023-05-31",
-            "max_tokens": MAX_TOKENS,
-            "temperature": TEMPERATURE,
-            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 500,
+            "messages": [{"role": "user", "content": full_prompt}]
         })
-        response = client.invoke_model(
-            modelId=BEDROCK_MODEL_ID,
-            body=body,
-            contentType="application/json",
-            accept="application/json",
+    )
+    result = _json.loads(response["body"].read())
+    return result["content"][0]["text"].strip()
+
+
+def _template_response(triage_decision: Dict, drug_recommendations: List[Dict]) -> str:
+    """Hard-coded template response when both LLMs are unavailable."""
+    urgency = triage_decision.get("urgency_level", "URGENT")
+    facility = triage_decision.get("facility", "উপজেলা স্বাস্থ্য কমপ্লেক্স")
+    top_disease = triage_decision.get("top_disease", "অজানা")
+
+    drug_text = ""
+    if drug_recommendations:
+        d = drug_recommendations[0]
+        drug_text = f"\n💊 ওষুধ: {d['generic_name']} — ৳{d['price_bdt']} প্রতি {d['unit']}"
+
+    if urgency == "EMERGENCY":
+        return (
+            f"🚨 জরুরি অবস্থা! এখনই ৯৯৯ কল করুন অথবা নিকটস্থ জেলা হাসপাতালে যান।"
+            f"\nসম্ভাব্য: {top_disease}"
+            f"\n\n⚠️ এটি পরামর্শ, ডাক্তারের বিকল্প নয়।"
         )
-        result = json.loads(response["body"].read())
-        return result["content"][0]["text"]
-    except Exception as e:
-        logger.warning("Bedrock call failed: %s", e)
-        return None
-
-
-# ---------------------------------------------------------------------------
-# Template fallback (offline / both LLMs failed)
-# ---------------------------------------------------------------------------
-
-def template_response(top_diseases: list, urgency: str, facility: str, drugs: list) -> str:
-    """
-    Generate a structured template response without any LLM.
-    Used when both GPT-4o and Bedrock are unavailable.
-    """
-    diseases_str = ", ".join(d["name"] for d in top_diseases) if top_diseases else "অনির্দিষ্ট"
-    drugs_str = "\n".join(
-        f"  - {d['generic_name']} ({d['brand_example']}) — ৳{d['price_bdt']}/{d['unit']}"
-        for d in drugs
-    ) or "  - প্রযোজ্য নয়"
-
     return (
-        f"✅ সম্ভাব্য রোগ: {diseases_str}\n"
-        f"🚨 জরুরি মাত্রা: {urgency}\n"
-        f"🏥 পরামর্শিত সুবিধা: {facility}\n"
-        f"💊 ওষুধ:\n{drugs_str}\n"
-        f"📋 স্বাস্থ্যকর্মীর নির্দেশনা: রোগীকে যত তাড়াতাড়ি সম্ভব উল্লিখিত সুবিধায় নিয়ে যান।\n"
-        f"{DISCLAIMER}"
+        f"আপনার উপসর্গ দেখে মনে হচ্ছে সম্ভাব্য রোগ: {top_disease}\n"
+        f"🏥 যোগাযোগ করুন: {facility}"
+        f"{drug_text}\n\n"
+        f"⚠️ এটি পরামর্শ, ডাক্তারের বিকল্প নয়।"
     )
-
-
-# ---------------------------------------------------------------------------
-# Core generator
-# ---------------------------------------------------------------------------
-
-def generate_response(
-    text: str,
-    entities: dict,
-    retrieved: list,
-    top_diseases: list,
-    urgency: str,
-    facility: str,
-    drugs: list,
-) -> str:
-    """
-    Generate the final Bangla triage response.
-
-    Tries GPT-4o → Bedrock Claude Haiku → Template fallback (in that order).
-    Guarantees the DISCLAIMER is always present in the output.
-
-    Args:
-        See build_prompt() for argument descriptions.
-
-    Returns:
-        Bangla response string ready to send to the user.
-    """
-    prompt = build_prompt(text, entities, retrieved, top_diseases, urgency, facility, drugs)
-
-    # Try primary LLM
-    response = call_openai(prompt)
-
-    # Fallback to Bedrock
-    if response is None:
-        logger.info("Falling back to Amazon Bedrock.")
-        response = call_bedrock(prompt)
-
-    # Final fallback — template
-    if response is None:
-        logger.warning("Both LLMs unavailable; using template response.")
-        response = template_response(top_diseases, urgency, facility, drugs)
-
-    # Guarantee disclaimer is present
-    if DISCLAIMER not in response:
-        response = response.rstrip() + f"\n{DISCLAIMER}"
-
-    return response
-
-
-# ---------------------------------------------------------------------------
-# Dev test
-# ---------------------------------------------------------------------------
-
-if __name__ == "__main__":
-    sample_diseases = [{"name": "ডেঙ্গু", "probability": 0.87}]
-    sample_drugs = [{"generic_name": "Paracetamol", "brand_example": "Napa", "price_bdt": 2.5, "unit": "tablet"}]
-    result = generate_response(
-        text="তিন দিন ধরে জ্বর, মাথাব্যথা, চোখ লাল",
-        entities={"symptoms": ["জ্বর", "মাথাব্যথা", "চোখ লাল"]},
-        retrieved=[],
-        top_diseases=sample_diseases,
-        urgency="URGENT",
-        facility="উপজেলা স্বাস্থ্য কমপ্লেক্স",
-        drugs=sample_drugs,
-    )
-    print(result)

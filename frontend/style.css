@@ -1,475 +1,181 @@
-/* HealthMax — Demo UI Stylesheet
-   Bilingual (Bangla + English labels), mobile-first, clean design.
-   Collaborator: Adjust brand colors in the :root section only.
-*/
-
-/* ---------------------------------------------------------------------------
-   CSS Variables (brand colors)
-   --------------------------------------------------------------------------- */
-:root {
-    --color-primary: #2b6cb0;
-    /* HealthMax brand blue */
-    --color-primary-dark: #2c5282;
-    --color-accent: #38a169;
-    /* Green — SELF-CARE urgency */
-    --color-warning: #d69e2e;
-    /* Amber — URGENT */
-    --color-danger: #e53e3e;
-    /* Red — EMERGENCY */
-    --color-bg: #f7fafc;
-    --color-card: #ffffff;
-    --color-text: #2d3748;
-    --color-text-light: #718096;
-    --color-border: #e2e8f0;
-    --font-bn: 'Noto Sans Bengali', 'SolaimanLipi', Arial, sans-serif;
-    --border-radius: 12px;
-    --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    --max-width: 760px;
-}
-
-/* ---------------------------------------------------------------------------
-   Reset & base
-   --------------------------------------------------------------------------- */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family: var(--font-bn);
-    background: var(--color-bg);
-    color: var(--color-text);
-    line-height: 1.7;
-    font-size: 16px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f0f4f8;
+  color: #1a202c;
+  font-size: 16px;
 }
 
-h2,
-h3 {
-    margin-bottom: 0.5rem;
+/* Header */
+header {
+  background: linear-gradient(135deg, #1a73e8, #0d47a1);
+  color: white;
+  padding: 16px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
+.header-inner { max-width: 860px; margin: 0 auto; }
+.logo { font-size: 1.6rem; font-weight: 700; }
+.tagline { font-size: 0.85rem; opacity: 0.85; margin-top: 2px; }
 
-p {
-    margin-bottom: 0.5rem;
-}
+/* Main */
+main { max-width: 860px; margin: 24px auto; padding: 0 16px 48px; }
 
-ul {
-    list-style: none;
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* ---------------------------------------------------------------------------
-   Header
-   --------------------------------------------------------------------------- */
-.hm-header {
-    background: var(--color-primary);
-    color: #fff;
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow);
-}
-
-.hm-logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-.hm-tagline {
-    font-size: 0.9rem;
-    opacity: 0.85;
-    flex: 1;
-}
-
-.hm-lang-toggle {
-    font-size: 0.85rem;
-    cursor: pointer;
-    opacity: 0.8;
-}
-
-.lang-active {
-    font-weight: 700;
-    text-decoration: underline;
-}
-
-/* ---------------------------------------------------------------------------
-   Main layout
-   --------------------------------------------------------------------------- */
-.hm-main {
-    max-width: var(--max-width);
-    margin: 2rem auto;
-    padding: 0 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-/* ---------------------------------------------------------------------------
-   Cards
-   --------------------------------------------------------------------------- */
+/* Cards */
 .card {
-    background: var(--color-card);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--color-border);
+  background: white;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
+.card h2, .card h3 { margin-bottom: 12px; color: #1a237e; }
 
-/* ---------------------------------------------------------------------------
-   Input panel
-   --------------------------------------------------------------------------- */
-.hm-input-panel h2 {
-    color: var(--color-primary);
-    font-size: 1.2rem;
+/* Input */
+textarea {
+  width: 100%;
+  border: 2px solid #c5cae9;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.2s;
 }
+textarea:focus { outline: none; border-color: #1a73e8; }
 
-.hint {
-    color: var(--color-text-light);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-}
-
-.hm-voice-section {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.hm-text-section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.hm-textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1.5px solid var(--color-border);
-    border-radius: 8px;
-    font-family: var(--font-bn);
-    font-size: 1rem;
-    resize: vertical;
-    transition: border-color 0.2s;
-}
-
-.hm-textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.15);
-}
-
-/* ---------------------------------------------------------------------------
-   Buttons
-   --------------------------------------------------------------------------- */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.65rem 1.4rem;
-    border: none;
-    border-radius: 8px;
-    font-family: var(--font-bn);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-}
-
-.btn:active {
-    transform: scale(0.97);
-}
+.btn-row { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
 
 .btn-primary {
-    background: var(--color-primary);
-    color: #fff;
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
 }
+.btn-primary:hover { background: #1557b0; }
+.btn-primary:disabled { background: #9e9e9e; cursor: not-allowed; }
 
-.btn-primary:hover {
-    background: var(--color-primary-dark);
+.btn-voice {
+  background: white;
+  color: #1a73e8;
+  border: 2px solid #1a73e8;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
 }
+.btn-voice:hover { background: #e8f0fe; }
+.btn-voice.recording { background: #ffebee; border-color: #e53935; color: #e53935; }
 
-.btn-primary:disabled {
-    background: #a0aec0;
-    cursor: not-allowed;
+/* Recording indicator */
+.recording-indicator { display: flex; align-items: center; gap: 10px; color: #e53935; margin-top: 12px; }
+.pulse-dot {
+  width: 14px; height: 14px; background: #e53935;
+  border-radius: 50%; animation: pulse 1s infinite;
 }
-
-.btn-secondary {
-    background: var(--color-bg);
-    color: var(--color-primary);
-    border: 1.5px solid var(--color-primary);
-}
-
-.btn-secondary:hover {
-    background: #ebf4ff;
-}
-
-.btn-record {
-    font-size: 1.05rem;
-    padding: 0.75rem 1.6rem;
-}
-
-.btn-record.recording {
-    background: var(--color-danger);
-    animation: pulse 1.2s infinite;
-}
-
 @keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.5);
-    }
-
-    70% {
-        box-shadow: 0 0 0 10px rgba(229, 62, 62, 0);
-    }
-
-    100% {
-        box-shadow: 0 0 0 0 rgba(229, 62, 62, 0);
-    }
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
 }
 
-.record-status {
-    color: var(--color-danger);
-    font-size: 0.9rem;
-}
+/* Transcript */
+#transcript-box { margin-top: 16px; padding: 12px; background: #f5f5f5; border-radius: 8px; }
+#transcript-box label { font-size: 0.85rem; color: #666; }
+#transcript-text { margin-top: 6px; font-size: 1rem; }
 
-.btn-reset {
-    width: 100%;
-    justify-content: center;
-    margin-top: 0.5rem;
-}
-
-/* ---------------------------------------------------------------------------
-   Transcript box
-   --------------------------------------------------------------------------- */
-.transcript-box {
-    background: #ebf8ff;
-    border: 1px solid #bee3f8;
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    margin-top: 0.75rem;
-    font-size: 0.95rem;
-}
-
-.transcript-label {
-    font-weight: 600;
-    color: var(--color-primary);
-}
-
-/* ---------------------------------------------------------------------------
-   Loading spinner
-   --------------------------------------------------------------------------- */
-.loading-spinner {
-    text-align: center;
-    padding: 2rem;
-    color: var(--color-text-light);
-}
-
+/* Loading */
+#loading { text-align: center; padding: 32px; }
 .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid var(--color-border);
-    border-top-color: var(--color-primary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto 0.75rem;
+  width: 40px; height: 40px;
+  border: 4px solid #e0e0e0; border-top-color: #1a73e8;
+  border-radius: 50%; animation: spin 0.8s linear infinite;
+  margin: 0 auto 12px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Emergency banner */
+.emergency-banner {
+  background: #b71c1c;
+  color: white;
+  padding: 16px 20px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  animation: flash 1s ease-in-out 3;
+}
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+/* NER entities */
+.ner-card {}
+.entity-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
+.tag-symptom { background: #e3f2fd; color: #0d47a1; border: 1px solid #90caf9; }
+.tag-disease  { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; }
+.tag-medicine { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
 
-/* ---------------------------------------------------------------------------
-   NER entity tags
-   --------------------------------------------------------------------------- */
-.ner-display {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
+/* Urgency */
+.card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+@media (max-width: 600px) { .card-row { grid-template-columns: 1fr; } }
 
-.ner-group {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.4rem;
-}
-
-.ner-group-label {
-    font-weight: 600;
-    color: var(--color-text-light);
-    font-size: 0.85rem;
-    min-width: 60px;
-}
-
-.ner-tag {
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-    font-size: 0.88rem;
-    font-weight: 500;
-}
-
-.ner-symptom {
-    background: #ebf8ff;
-    color: #2b6cb0;
-    border: 1px solid #bee3f8;
-}
-
-/* blue */
-.ner-disease {
-    background: #fff5f5;
-    color: #c53030;
-    border: 1px solid #fed7d7;
-}
-
-/* red */
-.ner-medicine {
-    background: #f0fff4;
-    color: #276749;
-    border: 1px solid #c6f6d5;
-}
-
-/* green */
-
-/* ---------------------------------------------------------------------------
-   Disease chart card
-   --------------------------------------------------------------------------- */
-.chart-card canvas {
-    max-height: 180px;
-}
-
-/* ---------------------------------------------------------------------------
-   Urgency badge
-   --------------------------------------------------------------------------- */
 .urgency-badge {
-    display: inline-block;
-    padding: 0.6rem 1.2rem;
-    border-radius: var(--border-radius);
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+  font-size: 1rem; font-weight: 700;
+  padding: 10px 16px; border-radius: 8px;
+  text-align: center;
+}
+.urgency-emergency { background: #ffcdd2; color: #b71c1c; }
+.urgency-urgent    { background: #fff3e0; color: #e65100; }
+.urgency-self-care { background: #e8f5e9; color: #1b5e20; }
+
+/* Drug cards */
+.drug-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  background: #fafafa;
+}
+.drug-name  { font-weight: 700; font-size: 1rem; color: #1a237e; }
+.drug-brand { font-size: 0.9rem; color: #666; margin: 4px 0; }
+.drug-price { font-size: 0.95rem; font-weight: 600; color: #2e7d32; }
+.affordable-badge {
+  background: #e8f5e9; color: #2e7d32;
+  padding: 2px 8px; border-radius: 12px;
+  font-size: 0.8rem; margin-left: 8px;
 }
 
-/* ---------------------------------------------------------------------------
-   Facility text
-   --------------------------------------------------------------------------- */
-.facility-text {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-text);
+/* LLM response */
+.llm-box {
+  background: #f5f5f5;
+  border-left: 4px solid #1a73e8;
+  padding: 14px 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
 }
-
-/* ---------------------------------------------------------------------------
-   Drug list
-   --------------------------------------------------------------------------- */
-.drug-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.drug-item {
-    background: #f7fafc;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 0.6rem 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.drug-name {
-    font-weight: 600;
-}
-
-.drug-brand {
-    color: var(--color-text-light);
-    font-size: 0.9rem;
-}
-
-.drug-price {
-    margin-left: auto;
-    font-weight: 700;
-    color: var(--color-primary);
-}
-
-.drug-affordable-badge {
-    background: #c6f6d5;
-    color: #276749;
-    font-size: 0.78rem;
-    padding: 0.1rem 0.5rem;
-    border-radius: 999px;
-    font-weight: 600;
-}
-
-/* ---------------------------------------------------------------------------
-   Full response
-   --------------------------------------------------------------------------- */
-.full-response {
-    white-space: pre-wrap;
-    font-size: 0.97rem;
-    line-height: 1.8;
-    margin-bottom: 1rem;
-    color: var(--color-text);
-}
-
-/* ---------------------------------------------------------------------------
-   Disclaimer
-   --------------------------------------------------------------------------- */
 .disclaimer {
-    text-align: center;
-    font-size: 0.88rem;
-    color: var(--color-text-light);
-    padding: 0.75rem;
-    border-top: 1px dashed var(--color-border);
-    margin-top: 0.5rem;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #e65100;
+  font-weight: 500;
 }
 
-/* ---------------------------------------------------------------------------
-   Footer
-   --------------------------------------------------------------------------- */
-.hm-footer {
-    text-align: center;
-    color: var(--color-text-light);
-    font-size: 0.82rem;
-    padding: 2rem 1rem;
-    border-top: 1px solid var(--color-border);
-    margin-top: 2rem;
-}
-
-/* ---------------------------------------------------------------------------
-   Responsive tweaks
-   --------------------------------------------------------------------------- */
-@media (max-width: 480px) {
-    .hm-main {
-        padding: 0 0.75rem;
-    }
-
-    .card {
-        padding: 1rem;
-    }
-
-    .btn {
-        font-size: 0.95rem;
-    }
-
-    .hm-logo {
-        font-size: 1.2rem;
-    }
-}
+/* Subtitle */
+.subtitle { color: #666; font-size: 0.9rem; margin-bottom: 14px; }
+.hidden { display: none !important; }

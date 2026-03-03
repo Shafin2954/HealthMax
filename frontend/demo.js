@@ -1,445 +1,228 @@
-/**
- * HealthMax — Browser Demo JavaScript
- *
- * Responsibilities:
- *  1. MediaRecorder API — record voice, send audio blob to /api/triage/voice
- *  2. Text input — send Bangla text to /api/triage
- *  3. Render results: NER entity highlights, disease chart, urgency badge, drug list
- *  4. TTS playback — fetch /api/tts and play MP3 audio (FLEX feature)
- *
- * Collaborator instructions:
- *  - API_BASE must point to the EC2 backend URL (or localhost for development).
- *  - The renderNerEntities() function highlights symptoms (blue), diseases (red),
- *    and medicines (green) inline in the transcript text.
- *  - The disease probability chart uses Chart.js bar chart.
- *  - Keep all user-facing strings in Bangla.
- */
-
-"use strict";
-
-// ---------------------------------------------------------------------------
-// Configuration
-// ---------------------------------------------------------------------------
-
-const API_BASE = window.location.origin; // Same origin when served by FastAPI
-// For local dev without backend running, override:
-// const API_BASE = "http://localhost:8000";
-
-const URGENCY_COLORS = {
-    EMERGENCY: "#e53e3e",  // Red
-    URGENT: "#d69e2e",  // Amber
-    "SELF-CARE": "#38a169", // Green
-};
-
-const URGENCY_LABELS_BN = {
-    EMERGENCY: "🚨 জরুরি — এখনই হাসপাতালে যান!",
-    URGENT: "⚠️ দরকারি — আজই ডাক্তার দেখান",
-    "SELF-CARE": "✅ স্বাভাবিক — ঘরে যত্ন নিন",
-};
-
-// ---------------------------------------------------------------------------
-// DOM references
-// ---------------------------------------------------------------------------
-
-const btnRecord = document.getElementById("btn-record");
-const btnRecordLabel = document.getElementById("btn-record-label");
-const recordStatus = document.getElementById("record-status");
-const symptomInput = document.getElementById("symptom-input");
-const btnSubmit = document.getElementById("btn-submit");
-const transcriptBox = document.getElementById("transcript-box");
-const transcriptText = document.getElementById("transcript-text");
-const loadingSpinner = document.getElementById("loading-spinner");
-const resultsPanel = document.getElementById("results-panel");
-const nerDisplay = document.getElementById("ner-display");
-const urgencyBadge = document.getElementById("urgency-badge");
-const facilityText = document.getElementById("facility-text");
-const drugList = document.getElementById("drug-list");
-const fullResponse = document.getElementById("full-response");
-const btnTts = document.getElementById("btn-tts");
-const ttsPlayer = document.getElementById("tts-player");
-const btnReset = document.getElementById("btn-reset");
-
-let diseaseChart = null;   // Chart.js instance
 let mediaRecorder = null;
 let audioChunks = [];
 let isRecording = false;
+let diseaseChart = null;
 
-// ---------------------------------------------------------------------------
-// Voice recording — MediaRecorder API
-// ---------------------------------------------------------------------------
-
-/**
- * Toggle voice recording on/off.
- * When stopped, sends the recorded audio blob to /api/triage/voice.
- *
- * TODO (collaborator):
- *  - Test on Chrome (preferred), Firefox, and Safari mobile.
- *  - Confirm MIME type support: prefer 'audio/webm;codecs=opus', fallback to 'audio/ogg'.
- *  - Show live waveform animation while recording (FLEX).
- */
-async function toggleRecording() {
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        alert("আপনার ব্রাউজার মাইক্রোফোন সমর্থন করে না। অনুগ্রহ করে Chrome ব্যবহার করুন।");
-        return;
-    }
-
-    if (!isRecording) {
-        // Start recording
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
-                ? "audio/webm;codecs=opus"
-                : "audio/ogg";
-
-            mediaRecorder = new MediaRecorder(stream, { mimeType });
-            audioChunks = [];
-
-            mediaRecorder.ondataavailable = (e) => {
-                if (e.data.size > 0) audioChunks.push(e.data);
-            };
-
-            mediaRecorder.onstop = async () => {
-                const audioBlob = new Blob(audioChunks, { type: mimeType });
-                stream.getTracks().forEach((t) => t.stop());
-                await submitVoice(audioBlob);
-            };
-
-            mediaRecorder.start(250); // collect data every 250ms
-            isRecording = true;
-            btnRecord.classList.add("recording");
-            btnRecordLabel.textContent = "থামান";
-            recordStatus.textContent = "রেকর্ডিং হচ্ছে...";
-        } catch (err) {
-            console.error("Microphone access denied:", err);
-            alert("মাইক্রোফোনে অনুমতি দিন এবং আবার চেষ্টা করুন।");
-        }
-    } else {
-        // Stop recording
-        mediaRecorder.stop();
-        isRecording = false;
-        btnRecord.classList.remove("recording");
-        btnRecordLabel.textContent = "কথা বলুন";
-        recordStatus.textContent = "প্রক্রিয়া হচ্ছে...";
-    }
-}
-
-/**
- * Send a recorded audio Blob to the voice triage endpoint.
- * @param {Blob} audioBlob — recorded audio blob
- */
-async function submitVoice(audioBlob) {
-    showLoading();
-    try {
-        const formData = new FormData();
-        formData.append("audio", audioBlob, "recording.webm");
-
-        const res = await fetch(`${API_BASE}/api/triage/voice`, {
-            method: "POST",
-            body: formData,
-        });
-        await handleApiResponse(res);
-    } catch (err) {
-        console.error("Voice triage error:", err);
-        showError("নেটওয়ার্ক সমস্যা। আবার চেষ্টা করুন।");
-    } finally {
-        hideLoading();
-        recordStatus.textContent = "";
-    }
-}
-
-// ---------------------------------------------------------------------------
-// Text input submission
-// ---------------------------------------------------------------------------
-
-/**
- * Send the Bangla text from the text input to /api/triage.
- */
+// ── Text submission ──
 async function submitText() {
-    const text = symptomInput.value.trim();
-    if (!text) {
-        alert("অনুগ্রহ করে আপনার লক্ষণ লিখুন।");
-        return;
-    }
-
-    showLoading();
-    try {
-        const res = await fetch(`${API_BASE}/api/triage`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text }),
-        });
-        await handleApiResponse(res);
-    } catch (err) {
-        console.error("Text triage error:", err);
-        showError("নেটওয়ার্ক সমস্যা। আবার চেষ্টা করুন।");
-    } finally {
-        hideLoading();
-    }
+  const text = document.getElementById("symptom-input").value.trim();
+  if (!text) {
+    alert("অনুগ্রহ করে উপসর্গ লিখুন।");
+    return;
+  }
+  await runTriage({ mode: "text", text });
 }
 
-// ---------------------------------------------------------------------------
-// API response handler
-// ---------------------------------------------------------------------------
+// ── Voice recording toggle ──
+async function toggleRecording() {
+  if (!isRecording) {
+    await startRecording();
+  } else {
+    stopRecording();
+  }
+}
 
-/**
- * Parse the triage API response and render all result widgets.
- * @param {Response} res — Fetch API response object
- */
-async function handleApiResponse(res) {
-    if (!res.ok) {
-        const errText = await res.text();
-        showError(`সার্ভার ত্রুটি (${res.status}): ${errText}`);
+async function startRecording() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+
+    mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
+    mediaRecorder.onstop = async () => {
+      const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+      await runTriage({ mode: "voice", audioBlob });
+    };
+
+    mediaRecorder.start();
+    isRecording = true;
+    document.getElementById("record-btn").textContent = "⏹ থামান";
+    document.getElementById("record-btn").classList.add("recording");
+    document.getElementById("recording-indicator").classList.remove("hidden");
+  } catch (err) {
+    alert("মাইক্রোফোন অ্যাক্সেস করতে পারছি না: " + err.message);
+  }
+}
+
+function stopRecording() {
+  if (mediaRecorder && isRecording) {
+    mediaRecorder.stop();
+    mediaRecorder.stream.getTracks().forEach((t) => t.stop());
+    isRecording = false;
+    document.getElementById("record-btn").textContent = "🎤 ভয়েস রেকর্ড";
+    document.getElementById("record-btn").classList.remove("recording");
+    document.getElementById("recording-indicator").classList.add("hidden");
+  }
+}
+
+// ── Core triage runner ──
+async function runTriage({ mode, text, audioBlob }) {
+  showLoading(true);
+  hideResults();
+
+  try {
+    let data;
+    if (mode === "text") {
+      const res = await fetch("/api/triage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      data = await res.json();
+    } else {
+      const formData = new FormData();
+      formData.append("audio", audioBlob, "recording.wav");
+      const res = await fetch("/api/triage/voice", { method: "POST", body: formData });
+      data = await res.json();
+
+      if (data.transcript) {
+        document.getElementById("transcript-text").textContent = data.transcript;
+        document.getElementById("transcript-box").classList.remove("hidden");
+        document.getElementById("symptom-input").value = data.transcript;
+      }
+
+      if (data.low_confidence) {
+        showLoading(false);
+        alert(data.fallback_message);
         return;
+      }
     }
 
-    const data = await res.json();
     renderResults(data);
+  } catch (err) {
+    alert("সার্ভারে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+    console.error(err);
+  } finally {
+    showLoading(false);
+  }
 }
 
-// ---------------------------------------------------------------------------
-// Result rendering
-// ---------------------------------------------------------------------------
-
-/**
- * Render all result widgets from the API response.
- * @param {Object} data — TriageResponse JSON from the API
- */
+// ── Render results ──
 function renderResults(data) {
-    // Show transcript
-    if (data.transcript) {
-        transcriptText.textContent = data.transcript;
-        transcriptBox.classList.remove("hidden");
-    }
+  document.getElementById("results").classList.remove("hidden");
 
-    // Render NER entities
-    renderNerEntities(data.transcript || "", data.entities || {});
+  // Emergency banner
+  const emergencyBanner = document.getElementById("emergency-banner");
+  if (data.emergency_override) {
+    emergencyBanner.classList.remove("hidden");
+  } else {
+    emergencyBanner.classList.add("hidden");
+  }
 
-    // Render disease probability chart
-    renderDiseaseChart(data.top_diseases || []);
+  // NER entities
+  renderNEREntities(data.ner_entities || {});
 
-    // Render urgency badge
-    renderUrgencyBadge(data.urgency || "SELF-CARE");
+  // Disease chart
+  renderDiseaseChart(data.top_diseases || []);
 
-    // Render facility recommendation
-    facilityText.textContent = data.facility || "";
+  // Urgency badge
+  const urgencyEl = document.getElementById("urgency-badge");
+  urgencyEl.textContent = data.urgency_label_bn || "জরুরি";
+  urgencyEl.className = "urgency-badge urgency-" + (data.urgency_level || "URGENT").toLowerCase();
 
-    // Render drug list
-    renderDrugList(data.drugs || []);
+  // Facility
+  document.getElementById("facility-text").textContent =
+    data.facility_recommendation || "উপজেলা স্বাস্থ্য কমপ্লেক্স";
 
-    // Render full response text
-    fullResponse.textContent = data.response_text || "";
+  // Drug cards
+  renderDrugCards(data.drug_recommendations || []);
 
-    // Show results panel
-    resultsPanel.classList.remove("hidden");
-    resultsPanel.scrollIntoView({ behavior: "smooth" });
+  // LLM response
+  document.getElementById("llm-response").textContent =
+    data.llm_response || "পরামর্শ লোড হচ্ছে...";
+
+  // Scroll to results
+  document.getElementById("results").scrollIntoView({ behavior: "smooth" });
 }
 
-/**
- * Highlight NER entities inline in the transcript text.
- * Symptoms → blue tags, Diseases → red tags, Medicines → green tags.
- *
- * TODO (collaborator):
- *  - Replace simple span list rendering with inline text highlighting
- *    that shows entities in context within the transcript sentence.
- *  - Use the 'start' and 'end' character offsets from the NER API if available.
- *
- * @param {string} transcript — Full Bangla transcript text
- * @param {Object} entities   — {symptoms: [], diseases: [], medicines: []}
- */
-function renderNerEntities(transcript, entities) {
-    nerDisplay.innerHTML = "";
+function renderNEREntities(entities) {
+  const container = document.getElementById("ner-entities");
+  container.innerHTML = "";
 
-    const groups = [
-        { label: "লক্ষণ", items: entities.symptoms || [], cssClass: "ner-symptom" },
-        { label: "রোগ", items: entities.diseases || [], cssClass: "ner-disease" },
-        { label: "ওষুধ", items: entities.medicines || [], cssClass: "ner-medicine" },
-    ];
+  const typeMap = {
+    symptoms: { label: "উপসর্গ", cls: "tag-symptom" },
+    diseases: { label: "রোগ", cls: "tag-disease" },
+    medicines: { label: "ওষুধ", cls: "tag-medicine" },
+  };
 
-    groups.forEach(({ label, items, cssClass }) => {
-        if (!items.length) return;
-        const groupEl = document.createElement("div");
-        groupEl.className = "ner-group";
-
-        const labelEl = document.createElement("span");
-        labelEl.className = "ner-group-label";
-        labelEl.textContent = `${label}: `;
-        groupEl.appendChild(labelEl);
-
-        items.forEach((item) => {
-            const tag = document.createElement("span");
-            tag.className = `ner-tag ${cssClass}`;
-            tag.textContent = item;
-            groupEl.appendChild(tag);
-        });
-
-        nerDisplay.appendChild(groupEl);
+  let hasEntities = false;
+  for (const [type, config] of Object.entries(typeMap)) {
+    const items = entities[type] || [];
+    items.forEach((item) => {
+      hasEntities = true;
+      const tag = document.createElement("span");
+      tag.className = `entity-tag ${config.cls}`;
+      tag.textContent = `${item} (${config.label})`;
+      container.appendChild(tag);
     });
+  }
 
-    if (nerDisplay.children.length === 0) {
-        nerDisplay.textContent = "কোনো লক্ষণ শনাক্ত হয়নি।";
-    }
+  if (!hasEntities) {
+    container.textContent = "কোনো নির্দিষ্ট উপসর্গ শনাক্ত হয়নি।";
+  }
 }
 
-/**
- * Render horizontal bar chart for disease probabilities.
- * @param {Array} diseases — [{name, probability}, ...]
- */
 function renderDiseaseChart(diseases) {
-    if (diseaseChart) {
-        diseaseChart.destroy();
-        diseaseChart = null;
-    }
+  const ctx = document.getElementById("disease-chart").getContext("2d");
+  if (diseaseChart) diseaseChart.destroy();
 
-    if (!diseases.length) return;
+  if (!diseases.length) {
+    ctx.canvas.parentElement.innerHTML += "<p>পর্যাপ্ত তথ্য নেই।</p>";
+    return;
+  }
 
-    const ctx = document.getElementById("disease-chart").getContext("2d");
-    diseaseChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: diseases.map((d) => d.name),
-            datasets: [{
-                label: "সম্ভাব্যতা",
-                data: diseases.map((d) => Math.round(d.probability * 100)),
-                backgroundColor: ["#4299e1", "#48bb78", "#ed8936"],
-                borderRadius: 6,
-            }],
+  diseaseChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: diseases.map((d) => d.disease),
+      datasets: [
+        {
+          label: "সম্ভাবনা (%)",
+          data: diseases.map((d) => (d.probability * 100).toFixed(1)),
+          backgroundColor: ["#4A90D9", "#5BA85F", "#E8A838"],
+          borderRadius: 6,
         },
-        options: {
-            indexAxis: "y",
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: {
-                x: {
-                    min: 0,
-                    max: 100,
-                    ticks: { callback: (v) => `${v}%` },
-                },
-            },
-        },
-    });
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, max: 100, ticks: { callback: (v) => v + "%" } },
+      },
+    },
+  });
 }
 
-/**
- * Render the urgency badge with the appropriate color.
- * @param {string} urgency — 'EMERGENCY' | 'URGENT' | 'SELF-CARE'
- */
-function renderUrgencyBadge(urgency) {
-    urgencyBadge.textContent = URGENCY_LABELS_BN[urgency] || urgency;
-    urgencyBadge.style.backgroundColor = URGENCY_COLORS[urgency] || "#718096";
-    urgencyBadge.className = `urgency-badge urgency-${urgency.toLowerCase().replace("-", "")}`;
-}
+function renderDrugCards(drugs) {
+  const container = document.getElementById("drug-cards");
+  container.innerHTML = "";
 
-/**
- * Render the drug recommendation list.
- * Marks affordable items (below ৳5) with the "সাশ্রয়ী" badge.
- * @param {Array} drugs — [{generic_name, brand_example, price_bdt, unit, affordable}, ...]
- */
-function renderDrugList(drugs) {
-    drugList.innerHTML = "";
-    if (!drugs.length) {
-        drugList.innerHTML = "<li>কোনো ওষুধ পরামর্শ নেই।</li>";
-        return;
-    }
-    drugs.forEach((drug) => {
-        const li = document.createElement("li");
-        li.className = "drug-item";
-        li.innerHTML = `
-      <span class="drug-name">${drug.generic_name}</span>
-      <span class="drug-brand">(${drug.brand_example})</span>
-      <span class="drug-price">৳${drug.price_bdt}/${drug.unit}</span>
-      ${drug.affordable ? '<span class="drug-affordable-badge">সাশ্রয়ী</span>' : ""}
+  if (!drugs.length) {
+    container.textContent = "ডাক্তারের পরামর্শ অনুযায়ী ওষুধ নিন।";
+    return;
+  }
+
+  drugs.forEach((drug) => {
+    const card = document.createElement("div");
+    card.className = "drug-card";
+    card.innerHTML = `
+      <div class="drug-name">💊 ${drug.generic_name}</div>
+      <div class="drug-brand">ব্র্যান্ড: ${drug.brand_example}</div>
+      <div class="drug-price">৳${drug.price_bdt} / ${drug.unit}
+        ${drug.affordable ? '<span class="affordable-badge">সাশ্রয়ী 💚</span>' : ""}
+      </div>
     `;
-        drugList.appendChild(li);
-    });
+    container.appendChild(card);
+  });
 }
 
-// ---------------------------------------------------------------------------
-// TTS playback (FLEX feature)
-// ---------------------------------------------------------------------------
-
-/**
- * Fetch TTS audio from /api/tts and play it in the browser.
- *
- * TODO (collaborator — FLEX):
- *  - Implement the /api/tts endpoint in main.py (see tts.py).
- *  - Test TTS audio on mobile Chrome — ensure autoplay policies allow it.
- */
-async function playTts() {
-    const text = fullResponse.textContent;
-    if (!text) return;
-
-    btnTts.disabled = true;
-    btnTts.textContent = "লোড হচ্ছে...";
-
-    try {
-        const res = await fetch(`${API_BASE}/api/tts`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text }),
-        });
-        if (!res.ok) throw new Error("TTS unavailable");
-        const audioBlob = await res.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-        ttsPlayer.src = audioUrl;
-        ttsPlayer.hidden = false;
-        await ttsPlayer.play();
-    } catch (err) {
-        console.warn("TTS playback failed:", err);
-        alert("TTS পরিষেবা এই মুহূর্তে উপলব্ধ নয়।");
-    } finally {
-        btnTts.disabled = false;
-        btnTts.textContent = "🔊 শুনুন";
-    }
+function showLoading(show) {
+  document.getElementById("loading").classList.toggle("hidden", !show);
+  document.getElementById("submit-btn").disabled = show;
 }
 
-// ---------------------------------------------------------------------------
-// UI utility helpers
-// ---------------------------------------------------------------------------
-
-function showLoading() {
-    loadingSpinner.classList.remove("hidden");
-    resultsPanel.classList.add("hidden");
-    btnSubmit.disabled = true;
-    btnRecord.disabled = true;
+function hideResults() {
+  document.getElementById("results").classList.add("hidden");
+  document.getElementById("transcript-box").classList.add("hidden");
 }
-
-function hideLoading() {
-    loadingSpinner.classList.add("hidden");
-    btnSubmit.disabled = false;
-    btnRecord.disabled = false;
-}
-
-function showError(message) {
-    hideLoading();
-    alert(`ত্রুটি: ${message}`);
-}
-
-function resetForm() {
-    symptomInput.value = "";
-    transcriptText.textContent = "";
-    transcriptBox.classList.add("hidden");
-    resultsPanel.classList.add("hidden");
-    nerDisplay.innerHTML = "";
-    facilityText.textContent = "";
-    drugList.innerHTML = "";
-    fullResponse.textContent = "";
-    if (diseaseChart) { diseaseChart.destroy(); diseaseChart = null; }
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-// ---------------------------------------------------------------------------
-// Event listeners
-// ---------------------------------------------------------------------------
-
-btnRecord.addEventListener("click", toggleRecording);
-btnSubmit.addEventListener("click", submitText);
-btnTts.addEventListener("click", playTts);
-btnReset.addEventListener("click", resetForm);
-
-// Allow Enter key (without Shift) to submit text
-symptomInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        submitText();
-    }
-});

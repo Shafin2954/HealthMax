@@ -1,0 +1,1371 @@
+[
+  {
+    "disease_name": "(ভারটিগো) প্যারোয়মসাল পজিশনাল ভার্টিগো ((Vertigo) Paroxysmal Positional Vertigo)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ভারসাম্য_হারা (Loss_of_Balance)",
+      "বমি (Vomiting)",
+      "মাথা_ব্যথা (Headache)",
+      "বমি_বমি_ভাব",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: (ভারটিগো) প্যারোয়মসাল পজিশনাল ভার্টিগো ((Vertigo) Paroxysmal Positional Vertigo). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ভারসাম্য_হারা (Loss_of_Balance), বমি (Vomiting), মাথা_ব্যথা (Headache), বমি_বমি_ভাব, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "CCHFV (Crimean Congo Hemorrhagic Fever)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "বমি (Vomiting)",
+      "ডায়রিয়া (Diarrhea)",
+      "বমি_বমি_ভাব",
+      "গলা_ব্যথা",
+      "বুকজ্বালা",
+      "মেজাজের_তীব্র_পরিবর্তন"
+    ],
+    "text_representation": "Disease: CCHFV (Crimean Congo Hemorrhagic Fever). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), পেট_ব্যথা (Abdominal_Pain), বমি (Vomiting), ডায়রিয়া (Diarrhea), বমি_বমি_ভাব, গলা_ব্যথা, বুকজ্বালা, মেজাজের_তীব্র_পরিবর্তন",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "অস্টিওআর্থারাইটিস (Osteoarthritis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "জয়েন্টে_ব্যথা (Joint_Pain)",
+      "হাটতে_অক্ষমতা",
+      "বুকজ্বালা",
+      "ঘাড়_ব্যথা"
+    ],
+    "text_representation": "Disease: অস্টিওআর্থারাইটিস (Osteoarthritis). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), জয়েন্টে_ব্যথা (Joint_Pain), হাটতে_অক্ষমতা, বুকজ্বালা, ঘাড়_ব্যথা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "অ্যালকোহলিক হেপাটাইটিস (Alcoholic Hepatitis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "পেট_ফোলা (Abdominal_Bloating)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "বমি (Vomiting)",
+      "বুকজ্বালা",
+      "হলুদ_ত্বক"
+    ],
+    "text_representation": "Disease: অ্যালকোহলিক হেপাটাইটিস (Alcoholic Hepatitis). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), পেট_ফোলা (Abdominal_Bloating), পেট_ব্যথা (Abdominal_Pain), বমি (Vomiting), বুকজ্বালা, হলুদ_ত্বক",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "আমাশয় (Dysentery)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "পেট_ফোলা (Abdominal_Bloating)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "রক্তাক্ত_ডায়রিয়া (Bloody_Diarrhea)",
+      "বমি (Vomiting)",
+      "দুর্বলতা (Weakness)",
+      "শুষ্ক_ত্বক (Dry_Skin)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: আমাশয় (Dysentery). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), পেট_ফোলা (Abdominal_Bloating), পেট_ব্যথা (Abdominal_Pain), রক্তাক্ত_ডায়রিয়া (Bloody_Diarrhea), বমি (Vomiting), দুর্বলতা (Weakness), শুষ্ক_ত্বক (Dry_Skin), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "আলসার (Ulcer)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "বমি_বমি_ভাব",
+      "বুকজ্বালা",
+      "পেট_ফেঁপে_থাকা",
+      "খাওয়ার_প্রতি_অনীহা"
+    ],
+    "text_representation": "Disease: আলসার (Ulcer). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), বমি_বমি_ভাব, বুকজ্বালা, পেট_ফেঁপে_থাকা, খাওয়ার_প্রতি_অনীহা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ইনফ্লুয়েঞ্জা (Influenza)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "বমি (Vomiting)",
+      "জ্বর (Fever)",
+      "পেশী_ব্যথা (Muscle_Pain)",
+      "মাথা_ব্যথা (Headache)",
+      "ডায়রিয়া (Diarrhea)",
+      "কাশি (Cough)",
+      "বমি_বমি_ভাব",
+      "গলা_ব্যথা",
+      "সর্দি",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: ইনফ্লুয়েঞ্জা (Influenza). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ক্লান্ত_বোধ (Fatigue), বমি (Vomiting), জ্বর (Fever), পেশী_ব্যথা (Muscle_Pain), মাথা_ব্যথা (Headache), ডায়রিয়া (Diarrhea), কাশি (Cough), বমি_বমি_ভাব, গলা_ব্যথা, সর্দি, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ইমপেটিগো (Impetigo)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "তীব্র_জ্বর (High_Fever)",
+      "ফুসকুড়ি (Blisters)",
+      "বুকজ্বালা",
+      "ফোস্কা",
+      "র‍্যাশ (Rash)"
+    ],
+    "text_representation": "Disease: ইমপেটিগো (Impetigo). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), তীব্র_জ্বর (High_Fever), ফুসকুড়ি (Blisters), বুকজ্বালা, ফোস্কা, র‍্যাশ (Rash)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "উচ্চ রক্তচাপ (High Blood Pressure)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "মাথা_ঘোরা (Dizziness)",
+      "ভারসাম্য_হারা (Loss_of_Balance)",
+      "মাথা_ব্যথা (Headache)",
+      "বুকে_ব্যথা (Chest_Pain)",
+      "বুকজ্বালা",
+      "ফোকাস _করতে-অক্ষমতা"
+    ],
+    "text_representation": "Disease: উচ্চ রক্তচাপ (High Blood Pressure). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), মাথা_ঘোরা (Dizziness), ভারসাম্য_হারা (Loss_of_Balance), মাথা_ব্যথা (Headache), বুকে_ব্যথা (Chest_Pain), বুকজ্বালা, ফোকাস _করতে-অক্ষমতা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "এইডস (AIDS)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ওজন_কমা (Weight_Loss)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "তীব্র_জ্বর (High_Fever)",
+      "মাথা_ব্যথা (Headache)",
+      "জয়েন্টে_ব্যথা (Joint_Pain)",
+      "ফোলা",
+      "কাশি (Cough)",
+      "ঠাণ্ডা_লাগা",
+      "বমি_বমি_ভাব",
+      "পেশীর_দুর্বলতা",
+      "গলা_ব্যথা",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: এইডস (AIDS). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ওজন_কমা (Weight_Loss), ক্লান্ত_বোধ (Fatigue), তীব্র_জ্বর (High_Fever), মাথা_ব্যথা (Headache), জয়েন্টে_ব্যথা (Joint_Pain), ফোলা, কাশি (Cough), ঠাণ্ডা_লাগা, বমি_বমি_ভাব, পেশীর_দুর্বলতা, গলা_ব্যথা, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "এনসেফালাইটিস (Encephalitis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "কথা_জড়িয়ে_আসা (Slurred_Speech)",
+      "জ্বর (Fever)",
+      "মাথা_ব্যথা (Headache)",
+      "খিঁচুনি",
+      "শরীর_অবশ",
+      "অজ্ঞান_হয়ে_যাওয়া",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: এনসেফালাইটিস (Encephalitis). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), কথা_জড়িয়ে_আসা (Slurred_Speech), জ্বর (Fever), মাথা_ব্যথা (Headache), খিঁচুনি, শরীর_অবশ, অজ্ঞান_হয়ে_যাওয়া, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "এপিলেপসি (Epilepsy)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "শক্ত_পেশী",
+      "সাময়িক_বিভ্রান্তি",
+      "দেজা_ভু",
+      "উদ্বেগ",
+      "ফিট",
+      "অজ্ঞান_হয়ে_যাওয়া",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: এপিলেপসি (Epilepsy). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), শক্ত_পেশী, সাময়িক_বিভ্রান্তি, দেজা_ভু, উদ্বেগ, ফিট, অজ্ঞান_হয়ে_যাওয়া, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "এলার্জি (Allergy)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "হাত_পায়ে_কাঁপুনি",
+      "বুকজ্বালা",
+      "একটানা_হাঁচি (Continuous_Sneezing)",
+      "ঠান্ডা (Cold)"
+    ],
+    "text_representation": "Disease: এলার্জি (Allergy). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), হাত_পায়ে_কাঁপুনি, বুকজ্বালা, একটানা_হাঁচি (Continuous_Sneezing), ঠান্ডা (Cold)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ওটিটিস মিডিয়া (Otitis Media)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "কথা_শুনতে_সমস্যা (Hearing_Difficulty)",
+      "মাথা_ব্যথা (Headache)",
+      "কান_থেকে_তরল_নিষ্কাশন",
+      "কানে_ব্যথা",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: ওটিটিস মিডিয়া (Otitis Media). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), কথা_শুনতে_সমস্যা (Hearing_Difficulty), মাথা_ব্যথা (Headache), কান_থেকে_তরল_নিষ্কাশন, কানে_ব্যথা, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ওষুধের প্রতিক্রিয়া (Drug Reaction)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "চুলকানি (Itching)",
+      "অস্থিবাধা (Joint_Pain)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "প্রস্রাবে_জ্বলন (Burning_Urination)",
+      "ফুসকুড়ি (Blisters)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: ওষুধের প্রতিক্রিয়া (Drug Reaction). Symptoms: জ্বলুনি (Burning_Sensation), চুলকানি (Itching), অস্থিবাধা (Joint_Pain), পেট_ব্যথা (Abdominal_Pain), প্রস্রাবে_জ্বলন (Burning_Urination), ফুসকুড়ি (Blisters), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "কলেরা (Cholera)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "দুর্বলতা (Weakness)",
+      "পানিশূন্যতা (Dehydration)",
+      "ডায়রিয়া (Diarrhea)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: কলেরা (Cholera). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), পেট_ব্যথা (Abdominal_Pain), দুর্বলতা (Weakness), পানিশূন্যতা (Dehydration), ডায়রিয়া (Diarrhea), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "কুষ্ঠ (Leprosy)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "শুষ্ক_ত্বক (Dry_Skin)",
+      "পেশীর_দুর্বলতা",
+      "শরীর_অবশ",
+      "চামড়ায়_ফ্যাকাশে_দাগ",
+      "ত্বকে_ছোট_ছোট_ফোঁড়া",
+      "পঙ্গু",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: কুষ্ঠ (Leprosy). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), শুষ্ক_ত্বক (Dry_Skin), পেশীর_দুর্বলতা, শরীর_অবশ, চামড়ায়_ফ্যাকাশে_দাগ, ত্বকে_ছোট_ছোট_ফোঁড়া, পঙ্গু, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "কোষ্ঠকাঠিন্য (Constipation)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "দুর্বলতা (Weakness)",
+      "জ্বর (Fever)",
+      "মলত্যাগে_অসুবিধা (Difficulty_in_Defecation)",
+      "পানিশূন্যতা (Dehydration)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: কোষ্ঠকাঠিন্য (Constipation). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), পেট_ব্যথা (Abdominal_Pain), দুর্বলতা (Weakness), জ্বর (Fever), মলত্যাগে_অসুবিধা (Difficulty_in_Defecation), পানিশূন্যতা (Dehydration), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ক্যান্সার (Cancer)",
+    "symptoms": [
+      "শরীর_ব্যথা (Body_Pain)",
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ওজন_কমা (Weight_Loss)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "শ্বাসকষ্ট (Shortness_of_Breath)",
+      "স্তনবৃদ্ধি (Breast_Enlargement)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: ক্যান্সার (Cancer). Symptoms: শরীর_ব্যথা (Body_Pain), জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ওজন_কমা (Weight_Loss), ক্লান্ত_বোধ (Fatigue), শ্বাসকষ্ট (Shortness_of_Breath), স্তনবৃদ্ধি (Breast_Enlargement), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ক্রনিক কোলেস্টেসিস (Chronic Cholestasis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "চুলকানি (Itching)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্ষুধা_কমা (Loss_of_Appetite)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "বমি (Vomiting)",
+      "হলুদ_চোখ (Yellow_Eyes)",
+      "বমি_বমি_ভাব",
+      "বুকজ্বালা",
+      "হলুদ_ত্বক"
+    ],
+    "text_representation": "Disease: ক্রনিক কোলেস্টেসিস (Chronic Cholestasis). Symptoms: জ্বলুনি (Burning_Sensation), চুলকানি (Itching), অস্থিবাধা (Joint_Pain), ক্ষুধা_কমা (Loss_of_Appetite), পেট_ব্যথা (Abdominal_Pain), বমি (Vomiting), হলুদ_চোখ (Yellow_Eyes), বমি_বমি_ভাব, বুকজ্বালা, হলুদ_ত্বক",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "গলগণ্ড (Goiter)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "শ্বাসকষ্ট (Shortness_of_Breath)",
+      "স্মৃতিশক্তি_লোপ (Memory_Loss)",
+      "মাথা_ঘোরা (Dizziness)",
+      "কাশি (Cough)",
+      "পেশীর_দুর্বলতা",
+      "গিলতে_অসুবিধা",
+      "বুকজ্বালা",
+      "ঘাড়ে_ফোলাভাব",
+      "কোষ্ঠকাঠিন্য (Constipation)"
+    ],
+    "text_representation": "Disease: গলগণ্ড (Goiter). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), শ্বাসকষ্ট (Shortness_of_Breath), স্মৃতিশক্তি_লোপ (Memory_Loss), মাথা_ঘোরা (Dizziness), কাশি (Cough), পেশীর_দুর্বলতা, গিলতে_অসুবিধা, বুকজ্বালা, ঘাড়ে_ফোলাভাব, কোষ্ঠকাঠিন্য (Constipation)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "গুটিবসন্ত (Smallpox)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "বমি (Vomiting)",
+      "জ্বর (Fever)",
+      "পেশী_ব্যথা (Muscle_Pain)",
+      "মাথা_ব্যথা (Headache)",
+      "পিঠে_ব্যথা (Back_Pain)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: গুটিবসন্ত (Smallpox). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), বমি (Vomiting), জ্বর (Fever), পেশী_ব্যথা (Muscle_Pain), মাথা_ব্যথা (Headache), পিঠে_ব্যথা (Back_Pain), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "গ্যাস্ট্রোএন্টেরাইটিস (Gastroenteritis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "বমি (Vomiting)",
+      "পানিশূন্যতা (Dehydration)",
+      "ডায়রিয়া (Diarrhea)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: গ্যাস্ট্রোএন্টেরাইটিস (Gastroenteritis). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), বমি (Vomiting), পানিশূন্যতা (Dehydration), ডায়রিয়া (Diarrhea), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "গ্লসাইটিস (Glossitis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "কথা_বলতে_সমস্যা (Speech_Difficulty)",
+      "অত্যধিক_লালা _নিঃসরণ",
+      "জিহ্বা_ফোলা",
+      "কোমল_জিহ্বা",
+      "কালশিটে_জিহ্বা",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: গ্লসাইটিস (Glossitis). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), কথা_বলতে_সমস্যা (Speech_Difficulty), অত্যধিক_লালা _নিঃসরণ, জিহ্বা_ফোলা, কোমল_জিহ্বা, কালশিটে_জিহ্বা, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "গ্লুকোমা (Glaucoma)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "বমি (Vomiting)",
+      "চোখ_লাল_হওয়া (Red_Eyes)",
+      "চোখে_ব্যথা (Eye_Pain)",
+      "মাথা_ব্যথা (Headache)",
+      "বমি_বমি_ভাব",
+      "ঝাপসা_দৃষ্টি",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: গ্লুকোমা (Glaucoma). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), বমি (Vomiting), চোখ_লাল_হওয়া (Red_Eyes), চোখে_ব্যথা (Eye_Pain), মাথা_ব্যথা (Headache), বমি_বমি_ভাব, ঝাপসা_দৃষ্টি, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "চিকুনগুনিয়া (Chikungunya)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "চোখে_সমস্যা (Eye_Problems)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "ফুসকুড়ি (Blisters)",
+      "জ্বর (Fever)",
+      "মাথা_ব্যথা (Headache)",
+      "জয়েন্টে_ব্যথা (Joint_Pain)",
+      "বমি_বমি_ভাব",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: চিকুনগুনিয়া (Chikungunya). Symptoms: জ্বলুনি (Burning_Sensation), চোখে_সমস্যা (Eye_Problems), অস্থিবাধা (Joint_Pain), ক্লান্ত_বোধ (Fatigue), ফুসকুড়ি (Blisters), জ্বর (Fever), মাথা_ব্যথা (Headache), জয়েন্টে_ব্যথা (Joint_Pain), বমি_বমি_ভাব, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "চোখ ওঠা (Conjunctivitis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "চোখ_লাল_হওয়া (Red_Eyes)",
+      "চোখ_দিয়ে_পানি_পড়া (Watery_Eyes)",
+      "চোখে_অস্বস্তিবোধ (Eye_Discomfort)",
+      "চোখের_পাতা_ফুলে_যাওয়া (Swollen_Eyelids)",
+      "চোখে_ব্যথা (Eye_Pain)",
+      "চোখের_পাতা_লেগে_থাকা (Sticky_Eyelids)",
+      "চোখে_জ্বালা_পোড়া (Burning_Eyes)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: চোখ ওঠা (Conjunctivitis). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), চোখ_লাল_হওয়া (Red_Eyes), চোখ_দিয়ে_পানি_পড়া (Watery_Eyes), চোখে_অস্বস্তিবোধ (Eye_Discomfort), চোখের_পাতা_ফুলে_যাওয়া (Swollen_Eyelids), চোখে_ব্যথা (Eye_Pain), চোখের_পাতা_লেগে_থাকা (Sticky_Eyelids), চোখে_জ্বালা_পোড়া (Burning_Eyes), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ছানি (Cataract)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ঝাপসা_দৃষ্টি",
+      "দুর্বল_রাতের_দৃষ্টি",
+      "দ্বিগুণ_দৃষ্টি",
+      "রং_বিবর্ণ_দেখা",
+      "আলোর_প্রতি_সংবেদনশীলতা",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: ছানি (Cataract). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ঝাপসা_দৃষ্টি, দুর্বল_রাতের_দৃষ্টি, দ্বিগুণ_দৃষ্টি, রং_বিবর্ণ_দেখা, আলোর_প্রতি_সংবেদনশীলতা, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "জন্ডিস (Jaundice)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "চুলকানি (Itching)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ওজন_কমা (Weight_Loss)",
+      "তীব্র_জ্বর (High_Fever)",
+      "ক্ষুধা_কমা (Loss_of_Appetite)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "বমি (Vomiting)",
+      "হলুদ_চোখ (Yellow_Eyes)",
+      "পেশী_ব্যথা (Muscle_Pain)",
+      "বমি_বমি_ভাব",
+      "বুকজ্বালা",
+      "শরীর_ঠান্ডা_হয়ে_যাওয়া",
+      "হলুদ_ত্বক",
+      "যৌথ_ব্যথা",
+      "গাঢ়_রঙের_প্রস্রাব",
+      "মাটির_রঙের_মল"
+    ],
+    "text_representation": "Disease: জন্ডিস (Jaundice). Symptoms: জ্বলুনি (Burning_Sensation), চুলকানি (Itching), অস্থিবাধা (Joint_Pain), ওজন_কমা (Weight_Loss), তীব্র_জ্বর (High_Fever), ক্ষুধা_কমা (Loss_of_Appetite), পেট_ব্যথা (Abdominal_Pain), বমি (Vomiting), হলুদ_চোখ (Yellow_Eyes), পেশী_ব্যথা (Muscle_Pain), বমি_বমি_ভাব, বুকজ্বালা, শরীর_ঠান্ডা_হয়ে_যাওয়া, হলুদ_ত্বক, যৌথ_ব্যথা, গাঢ়_রঙের_প্রস্রাব, মাটির_রঙের_মল",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "জলবসন্ত (Chickenpox)",
+    "symptoms": [
+      "শরীর_ব্যথা (Body_Pain)",
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ঘামাচির_মতো_গুটি (Prickly_Heat_Rash)",
+      "ফুসকুড়ি (Blisters)",
+      "জ্বর (Fever)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: জলবসন্ত (Chickenpox). Symptoms: শরীর_ব্যথা (Body_Pain), জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ঘামাচির_মতো_গুটি (Prickly_Heat_Rash), ফুসকুড়ি (Blisters), জ্বর (Fever), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "জলাতঙ্ক (Rabies)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "জ্বর (Fever)",
+      "মাথা_ব্যথা (Headache)",
+      "গলা_ব্যথা",
+      "খিঁচুনি",
+      "অত্যধিক_লালা _নিঃসরণ",
+      "গিলতে_অসুবিধা",
+      "অনিদ্রা",
+      "কোমা",
+      "বাতাসের_ভয়",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: জলাতঙ্ক (Rabies). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), জ্বর (Fever), মাথা_ব্যথা (Headache), গলা_ব্যথা, খিঁচুনি, অত্যধিক_লালা _নিঃসরণ, গিলতে_অসুবিধা, অনিদ্রা, কোমা, বাতাসের_ভয়, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "জিইআরডি (GERD)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "অম্লতা (Acidity)",
+      "জিহ্বায়_আলসার (Tongue_Ulcer)",
+      "বমি (Vomiting)",
+      "বুকে_ব্যথা (Chest_Pain)",
+      "কাশি (Cough)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: জিইআরডি (GERD). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), পেট_ব্যথা (Abdominal_Pain), অম্লতা (Acidity), জিহ্বায়_আলসার (Tongue_Ulcer), বমি (Vomiting), বুকে_ব্যথা (Chest_Pain), কাশি (Cough), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "টাইফয়েড (Typhoid)",
+    "symptoms": [
+      "শরীর_ব্যথা (Body_Pain)",
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "তীব্র_জ্বর (High_Fever)",
+      "ক্ষুধা_কমা (Loss_of_Appetite)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "বমি (Vomiting)",
+      "মাথা_ব্যথা (Headache)",
+      "ডায়রিয়া (Diarrhea)",
+      "কাশি (Cough)",
+      "বুকজ্বালা",
+      "কোষ্ঠকাঠিন্য (Constipation)",
+      "নাড়ি_স্পন্দন কমা",
+      "র‍্যাশ (Rash)"
+    ],
+    "text_representation": "Disease: টাইফয়েড (Typhoid). Symptoms: শরীর_ব্যথা (Body_Pain), জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), তীব্র_জ্বর (High_Fever), ক্ষুধা_কমা (Loss_of_Appetite), পেট_ব্যথা (Abdominal_Pain), বমি (Vomiting), মাথা_ব্যথা (Headache), ডায়রিয়া (Diarrhea), কাশি (Cough), বুকজ্বালা, কোষ্ঠকাঠিন্য (Constipation), নাড়ি_স্পন্দন কমা, র‍্যাশ (Rash)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ট্র্যাকোমা (Trachoma)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "চোখ_দিয়ে_পানি_পড়া (Watery_Eyes)",
+      "চোখে_ব্যথা (Eye_Pain)",
+      "ঝাপসা_দৃষ্টি",
+      "আলোর_প্রতি_সংবেদনশীলতা",
+      "বুকজ্বালা",
+      "কর্নিয়াল_ক্ষতি"
+    ],
+    "text_representation": "Disease: ট্র্যাকোমা (Trachoma). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), চোখ_দিয়ে_পানি_পড়া (Watery_Eyes), চোখে_ব্যথা (Eye_Pain), ঝাপসা_দৃষ্টি, আলোর_প্রতি_সংবেদনশীলতা, বুকজ্বালা, কর্নিয়াল_ক্ষতি",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ডাইমরফিক হেমোরয়েডস (পাইলস) (Dimorphic Hemorrhoids (Piles))",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "মলদ্বারে_জ্বালা (Anal_Burning)",
+      "রক্তাক্ত_মল (Bloody_Stool)",
+      "পায়ু_অঞ্চলে_ব্যথা (Anal_Pain)",
+      "মলত্যাগের_সময়_ব্যথা (Painful_Defecation)",
+      "বুকজ্বালা",
+      "কোষ্ঠকাঠিন্য (Constipation)"
+    ],
+    "text_representation": "Disease: ডাইমরফিক হেমোরয়েডস (পাইলস) (Dimorphic Hemorrhoids (Piles)). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), মলদ্বারে_জ্বালা (Anal_Burning), রক্তাক্ত_মল (Bloody_Stool), পায়ু_অঞ্চলে_ব্যথা (Anal_Pain), মলত্যাগের_সময়_ব্যথা (Painful_Defecation), বুকজ্বালা, কোষ্ঠকাঠিন্য (Constipation)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ডায়েবেটিস (Diabetes)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অধিক_ক্ষুধা (Excessive_Hunger)",
+      "অতিরিক্ত_মুত্রনিষ্কাসন (Frequent_Urination)",
+      "চোখে_সমস্যা (Eye_Problems)",
+      "অস্থিবাধা (Joint_Pain)",
+      "জড়তা (Numbness)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: ডায়েবেটিস (Diabetes). Symptoms: জ্বলুনি (Burning_Sensation), অধিক_ক্ষুধা (Excessive_Hunger), অতিরিক্ত_মুত্রনিষ্কাসন (Frequent_Urination), চোখে_সমস্যা (Eye_Problems), অস্থিবাধা (Joint_Pain), জড়তা (Numbness), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ডিপথেরিয়া  (None)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "জ্বর (Fever)",
+      "কাশি (Cough)",
+      "ঠাণ্ডা_লাগা",
+      "গলা_ব্যথা",
+      "অত্যধিক_লালা _নিঃসরণ",
+      "গিলতে_অসুবিধা",
+      "বুকজ্বালা",
+      "কালশিটে_পড়া",
+      "নাকের_প্রদাহ (Nasal_Inflammation)"
+    ],
+    "text_representation": "Disease: ডিপথেরিয়া  (None). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), জ্বর (Fever), কাশি (Cough), ঠাণ্ডা_লাগা, গলা_ব্যথা, অত্যধিক_লালা _নিঃসরণ, গিলতে_অসুবিধা, বুকজ্বালা, কালশিটে_পড়া, নাকের_প্রদাহ (Nasal_Inflammation)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ডিমনেশিয়া (Dementia)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "স্মৃতিশক্তি_লোপ (Memory_Loss)",
+      "কথা_বলতে_সমস্যা (Speech_Difficulty)",
+      "কথা_শুনতে_সমস্যা (Hearing_Difficulty)",
+      "ঘুমে_সমস্যা (Sleep_Issues)",
+      "বুদ্ধি_লোপ (Cognitive_Decline)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: ডিমনেশিয়া (Dementia). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), স্মৃতিশক্তি_লোপ (Memory_Loss), কথা_বলতে_সমস্যা (Speech_Difficulty), কথা_শুনতে_সমস্যা (Hearing_Difficulty), ঘুমে_সমস্যা (Sleep_Issues), বুদ্ধি_লোপ (Cognitive_Decline), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ডেঙ্গু (Dengue)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "শ্বাসকষ্ট (Shortness_of_Breath)",
+      "তীব্র_জ্বর (High_Fever)",
+      "চোখের_পেছনে_ব্যথা (Pain_Behind_Eyes)",
+      "ক্ষুধা_কমা (Loss_of_Appetite)",
+      "র‌্যাশ",
+      "দ্রুত_নাড়ি_স্পন্দন (Rapid_Pulse)",
+      "চেতনা_হারা (Loss_of_Consciousness)",
+      "রক্তবমি (Vomiting_Blood)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: ডেঙ্গু (Dengue). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), শ্বাসকষ্ট (Shortness_of_Breath), তীব্র_জ্বর (High_Fever), চোখের_পেছনে_ব্যথা (Pain_Behind_Eyes), ক্ষুধা_কমা (Loss_of_Appetite), র‌্যাশ, দ্রুত_নাড়ি_স্পন্দন (Rapid_Pulse), চেতনা_হারা (Loss_of_Consciousness), রক্তবমি (Vomiting_Blood), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "দাদ রোগ (Ringworm)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "চুলকানি (Itching)",
+      "অস্থিবাধা (Joint_Pain)",
+      "র‌্যাশ",
+      "খসখসে_ত্বক",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: দাদ রোগ (Ringworm). Symptoms: জ্বলুনি (Burning_Sensation), চুলকানি (Itching), অস্থিবাধা (Joint_Pain), র‌্যাশ, খসখসে_ত্বক, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ধনুষ্টঙ্কার  (None)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "দ্রুত_নাড়ি_স্পন্দন (Rapid_Pulse)",
+      "জ্বর (Fever)",
+      "পেশী_ব্যথা (Muscle_Pain)",
+      "ডায়রিয়া (Diarrhea)",
+      "ঘাম_হওয়া",
+      "গিলতে_অসুবিধা",
+      "উচ্চ_রক্তচাপ",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: ধনুষ্টঙ্কার  (None). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), দ্রুত_নাড়ি_স্পন্দন (Rapid_Pulse), জ্বর (Fever), পেশী_ব্যথা (Muscle_Pain), ডায়রিয়া (Diarrhea), ঘাম_হওয়া, গিলতে_অসুবিধা, উচ্চ_রক্তচাপ, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "নিপাহ ভাইরাস (Nipah Virus)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "তীব্র_জ্বর (High_Fever)",
+      "মাথা_ব্যথা (Headache)",
+      "অত্যধিক_লালা _নিঃসরণ",
+      "অজ্ঞান_হয়ে_যাওয়া",
+      "আবোলতাবোল_কথা_বলা",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: নিপাহ ভাইরাস (Nipah Virus). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), তীব্র_জ্বর (High_Fever), মাথা_ব্যথা (Headache), অত্যধিক_লালা _নিঃসরণ, অজ্ঞান_হয়ে_যাওয়া, আবোলতাবোল_কথা_বলা, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "নিমোনিয়া (Pneumonia)",
+    "symptoms": [
+      "শরীর_ব্যথা (Body_Pain)",
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "শ্বাসকষ্ট (Shortness_of_Breath)",
+      "তীব্র_জ্বর (High_Fever)",
+      "বুকে_ব্যথা (Chest_Pain)",
+      "খাবারের_অরুচি",
+      "কাশির_সঙ্গে_রক্তপাত (Coughing_Blood)",
+      "কফ্",
+      "কাশি (Cough)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: নিমোনিয়া (Pneumonia). Symptoms: শরীর_ব্যথা (Body_Pain), জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), শ্বাসকষ্ট (Shortness_of_Breath), তীব্র_জ্বর (High_Fever), বুকে_ব্যথা (Chest_Pain), খাবারের_অরুচি, কাশির_সঙ্গে_রক্তপাত (Coughing_Blood), কফ্, কাশি (Cough), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "পক্ষাঘাত (Paralysis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "কথা_বলতে_সমস্যা (Speech_Difficulty)",
+      "শরীর_অবশ",
+      "মাংশপেশি_দুর্বল",
+      "হাত_ও_পায়ে_ব্যথা",
+      "শক্ত_পেশী",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: পক্ষাঘাত (Paralysis). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), কথা_বলতে_সমস্যা (Speech_Difficulty), শরীর_অবশ, মাংশপেশি_দুর্বল, হাত_ও_পায়ে_ব্যথা, শক্ত_পেশী, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "পারকিনসন্স (Parkinsons)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ভারসাম্য_হারা (Loss_of_Balance)",
+      "হাত_পায়ে_কাঁপুনি",
+      "হাত_পা_শক্ত",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: পারকিনসন্স (Parkinsons). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ভারসাম্য_হারা (Loss_of_Balance), হাত_পায়ে_কাঁপুনি, হাত_পা_শক্ত, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "পায়োরিয়া (Pyorrhea)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "অত্যধিক_লালা _নিঃসরণ",
+      "বুকজ্বালা",
+      "মাড়ির_প্রদাহ",
+      "মাড়িতে_ফোড়া",
+      "মাড়িতে_গর্ত",
+      "দাঁতের_গোড়া_আলগা",
+      "মাড়ি_হতে_পূঁজ"
+    ],
+    "text_representation": "Disease: পায়োরিয়া (Pyorrhea). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), অত্যধিক_লালা _নিঃসরণ, বুকজ্বালা, মাড়ির_প্রদাহ, মাড়িতে_ফোড়া, মাড়িতে_গর্ত, দাঁতের_গোড়া_আলগা, মাড়ি_হতে_পূঁজ",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "পেপটিক আলসার (Peptic Ulcer)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "চুলকানি (Itching)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্ষুধা_কমা (Loss_of_Appetite)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "বদহজম (Indigestion)",
+      "বমি (Vomiting)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: পেপটিক আলসার (Peptic Ulcer). Symptoms: জ্বলুনি (Burning_Sensation), চুলকানি (Itching), অস্থিবাধা (Joint_Pain), ক্ষুধা_কমা (Loss_of_Appetite), পেট_ব্যথা (Abdominal_Pain), বদহজম (Indigestion), বমি (Vomiting), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "পোলিও (Polio)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "জ্বর (Fever)",
+      "মাথা_ব্যথা (Headache)",
+      "বমি_বমি_ভাব",
+      "গলা_ব্যথা",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: পোলিও (Polio). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ক্লান্ত_বোধ (Fatigue), পেট_ব্যথা (Abdominal_Pain), জ্বর (Fever), মাথা_ব্যথা (Headache), বমি_বমি_ভাব, গলা_ব্যথা, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "প্যারালাইসিস(মস্তিষ্কের রক্তক্ষরণ) (Paralysis (Brain Hemorrhage))",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "বমি (Vomiting)",
+      "মাথা_ব্যথা (Headache)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: প্যারালাইসিস(মস্তিষ্কের রক্তক্ষরণ) (Paralysis (Brain Hemorrhage)). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), বমি (Vomiting), মাথা_ব্যথা (Headache), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "প্লুরিসি (Pleurisy)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "শ্বাসকষ্ট (Shortness_of_Breath)",
+      "জ্বর (Fever)",
+      "বুকে_ব্যথা (Chest_Pain)",
+      "কাশি (Cough)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: প্লুরিসি (Pleurisy). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), শ্বাসকষ্ট (Shortness_of_Breath), জ্বর (Fever), বুকে_ব্যথা (Chest_Pain), কাশি (Cough), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ফাঙ্গাস (Fungal Infection)",
+    "symptoms": [
+      "শরীর_ব্যথা (Body_Pain)",
+      "জ্বলুনি (Burning_Sensation)",
+      "চুলকানি (Itching)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ফুসকুড়ি (Blisters)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: ফাঙ্গাস (Fungal Infection). Symptoms: শরীর_ব্যথা (Body_Pain), জ্বলুনি (Burning_Sensation), চুলকানি (Itching), অস্থিবাধা (Joint_Pain), ফুসকুড়ি (Blisters), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "বধিরতা (Deafness)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "শ্রবণশক্তি_হ্রাস",
+      "শোনার_অসুবিধা",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: বধিরতা (Deafness). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), শ্রবণশক্তি_হ্রাস, শোনার_অসুবিধা, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "বাত (Arthritis)",
+    "symptoms": [
+      "শরীর_ব্যথা (Body_Pain)",
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ওজন_কমা (Weight_Loss)",
+      "ঘুমে_সমস্যা (Sleep_Issues)",
+      "দুর্বলতা (Weakness)",
+      "পেশী_ব্যথা (Muscle_Pain)",
+      "জয়েন্টে_ব্যথা (Joint_Pain)",
+      "ফোলা",
+      "হাটতে_অক্ষমতা",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: বাত (Arthritis). Symptoms: শরীর_ব্যথা (Body_Pain), জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ওজন_কমা (Weight_Loss), ঘুমে_সমস্যা (Sleep_Issues), দুর্বলতা (Weakness), পেশী_ব্যথা (Muscle_Pain), জয়েন্টে_ব্যথা (Joint_Pain), ফোলা, হাটতে_অক্ষমতা, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "বেরিবেরি (Beriberi)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "দুর্বলতা (Weakness)",
+      "হাটতে_অক্ষমতা",
+      "পক্ষাঘাত",
+      "পেশীর_দুর্বলতা",
+      "হাত_ও_পায়ে_শিহরণ",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: বেরিবেরি (Beriberi). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ক্লান্ত_বোধ (Fatigue), দুর্বলতা (Weakness), হাটতে_অক্ষমতা, পক্ষাঘাত, পেশীর_দুর্বলতা, হাত_ও_পায়ে_শিহরণ, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ব্রংকাইটিস (Bronchitis)",
+    "symptoms": [
+      "শরীর_ব্যথা (Body_Pain)",
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "শ্বাসকষ্ট (Shortness_of_Breath)",
+      "জ্বর (Fever)",
+      "বুকে_ব্যথা (Chest_Pain)",
+      "কাশির_সঙ্গে_রক্তপাত (Coughing_Blood)",
+      "কাশি (Cough)",
+      "বুকজ্বালা",
+      "গলায়_শ্লেষ্মা",
+      "কাশির_সাথে_মিউকাস"
+    ],
+    "text_representation": "Disease: ব্রংকাইটিস (Bronchitis). Symptoms: শরীর_ব্যথা (Body_Pain), জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), শ্বাসকষ্ট (Shortness_of_Breath), জ্বর (Fever), বুকে_ব্যথা (Chest_Pain), কাশির_সঙ্গে_রক্তপাত (Coughing_Blood), কাশি (Cough), বুকজ্বালা, গলায়_শ্লেষ্মা, কাশির_সাথে_মিউকাস",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ব্রঙ্কিয়াল অ্যাজমা (Bronchial Asthma)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "শ্বাসকষ্ট (Shortness_of_Breath)",
+      "তীব্র_জ্বর (High_Fever)",
+      "কাশি (Cough)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: ব্রঙ্কিয়াল অ্যাজমা (Bronchial Asthma). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ক্লান্ত_বোধ (Fatigue), শ্বাসকষ্ট (Shortness_of_Breath), তীব্র_জ্বর (High_Fever), কাশি (Cough), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ব্রণ (Acne)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ফুসকুড়ি (Blisters)",
+      "বুকজ্বালা",
+      "পুঁজ_ভরা_পিম্পল (Pus_Filled_Pimple)"
+    ],
+    "text_representation": "Disease: ব্রণ (Acne). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ফুসকুড়ি (Blisters), বুকজ্বালা, পুঁজ_ভরা_পিম্পল (Pus_Filled_Pimple)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ভ্যারিকোস ভেইন (Varicose Vein)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ওজন_বৃদ্ধি (Weight_Gain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "বুকজ্বালা",
+      "কালশিটে_পড়া"
+    ],
+    "text_representation": "Disease: ভ্যারিকোস ভেইন (Varicose Vein). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ওজন_বৃদ্ধি (Weight_Gain), ক্লান্ত_বোধ (Fatigue), বুকজ্বালা, কালশিটে_পড়া",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "মস্তিষ্কের টিউমার (Brain Tumor)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "চোখে_সমস্যা (Eye_Problems)",
+      "অস্থিবাধা (Joint_Pain)",
+      "স্মৃতিশক্তি_লোপ (Memory_Loss)",
+      "ভারসাম্য_হারা (Loss_of_Balance)",
+      "দুর্বলতা (Weakness)",
+      "মাথা_ব্যথা (Headache)",
+      "হাটতে_অক্ষমতা",
+      "শ্রবণশক্তি_হ্রাস",
+      "বুকজ্বালা",
+      "ফোকাস _করতে-অক্ষমতা"
+    ],
+    "text_representation": "Disease: মস্তিষ্কের টিউমার (Brain Tumor). Symptoms: জ্বলুনি (Burning_Sensation), চোখে_সমস্যা (Eye_Problems), অস্থিবাধা (Joint_Pain), স্মৃতিশক্তি_লোপ (Memory_Loss), ভারসাম্য_হারা (Loss_of_Balance), দুর্বলতা (Weakness), মাথা_ব্যথা (Headache), হাটতে_অক্ষমতা, শ্রবণশক্তি_হ্রাস, বুকজ্বালা, ফোকাস _করতে-অক্ষমতা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "মাইগ্রেন (Migraine)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "অম্লতা (Acidity)",
+      "বদহজম (Indigestion)",
+      "মাথা_ব্যথা (Headache)",
+      "ঝাপসা_দৃষ্টি",
+      "বুকজ্বালা",
+      "ঘাড়_শক্ত",
+      "মানসিক_অস্থিরতা (Mental_Anxiety)"
+    ],
+    "text_representation": "Disease: মাইগ্রেন (Migraine). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), অম্লতা (Acidity), বদহজম (Indigestion), মাথা_ব্যথা (Headache), ঝাপসা_দৃষ্টি, বুকজ্বালা, ঘাড়_শক্ত, মানসিক_অস্থিরতা (Mental_Anxiety)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "মূত্রনালীর সংক্রমণ (Urinary Tract Infection)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "প্রস্রাবে_জ্বলন (Burning_Urination)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: মূত্রনালীর সংক্রমণ (Urinary Tract Infection). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), প্রস্রাবে_জ্বলন (Burning_Urination), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "ম্যালেরিয়া (Malaria)",
+    "symptoms": [
+      "শরীর_ব্যথা (Body_Pain)",
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "তীব্র_জ্বর (High_Fever)",
+      "দুর্বলতা (Weakness)",
+      "মাথা_ব্যথা (Headache)",
+      "ঠাণ্ডা_লাগা",
+      "বমি_বমি_ভাব",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: ম্যালেরিয়া (Malaria). Symptoms: শরীর_ব্যথা (Body_Pain), জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), তীব্র_জ্বর (High_Fever), দুর্বলতা (Weakness), মাথা_ব্যথা (Headache), ঠাণ্ডা_লাগা, বমি_বমি_ভাব, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "যক্ষ্মা (Tuberculosis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ওজন_কমা (Weight_Loss)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "শ্বাসকষ্ট (Shortness_of_Breath)",
+      "ক্ষুধা_কমা (Loss_of_Appetite)",
+      "জ্বর (Fever)",
+      "বুকে_ব্যথা (Chest_Pain)",
+      "কাশির_সঙ্গে_রক্তপাত (Coughing_Blood)",
+      "কাশি (Cough)",
+      "ঘাম_হওয়া",
+      "বুকজ্বালা",
+      "গলায়_শ্লেষ্মা",
+      "শরীর_ঠান্ডা_হয়ে_যাওয়া"
+    ],
+    "text_representation": "Disease: যক্ষ্মা (Tuberculosis). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ওজন_কমা (Weight_Loss), ক্লান্ত_বোধ (Fatigue), শ্বাসকষ্ট (Shortness_of_Breath), ক্ষুধা_কমা (Loss_of_Appetite), জ্বর (Fever), বুকে_ব্যথা (Chest_Pain), কাশির_সঙ্গে_রক্তপাত (Coughing_Blood), কাশি (Cough), ঘাম_হওয়া, বুকজ্বালা, গলায়_শ্লেষ্মা, শরীর_ঠান্ডা_হয়ে_যাওয়া",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "রিকেট (Rickets)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "পেশীর_দুর্বলতা",
+      "দুর্বল_অস্থিসন্ধি",
+      "দাঁত_ভঙ্গুর",
+      "হাড়_ভঙ্গুর",
+      "পায়ের_হাড়গুলি_ধনুকের_মত_বাঁকা",
+      "হাত_ও_পায়ে_ব্যথা",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: রিকেট (Rickets). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), পেশীর_দুর্বলতা, দুর্বল_অস্থিসন্ধি, দাঁত_ভঙ্গুর, হাড়_ভঙ্গুর, পায়ের_হাড়গুলি_ধনুকের_মত_বাঁকা, হাত_ও_পায়ে_ব্যথা, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "রিফট ভ্যালি ফিভার (Rift Valley Fever)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "বমি (Vomiting)",
+      "জ্বর (Fever)",
+      "চোখে_ব্যথা (Eye_Pain)",
+      "পেশী_ব্যথা (Muscle_Pain)",
+      "মাথা_ব্যথা (Headache)",
+      "জয়েন্টে_ব্যথা (Joint_Pain)",
+      "বুকজ্বালা",
+      "ঘাড়_শক্ত"
+    ],
+    "text_representation": "Disease: রিফট ভ্যালি ফিভার (Rift Valley Fever). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), বমি (Vomiting), জ্বর (Fever), চোখে_ব্যথা (Eye_Pain), পেশী_ব্যথা (Muscle_Pain), মাথা_ব্যথা (Headache), জয়েন্টে_ব্যথা (Joint_Pain), বুকজ্বালা, ঘাড়_শক্ত",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "লিউকোমিয়া (Leukemia)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ওজন_কমা (Weight_Loss)",
+      "ক্ষুধা_কমা (Loss_of_Appetite)",
+      "দুর্বলতা (Weakness)",
+      "ঘাম_হওয়া",
+      "বুকজ্বালা",
+      "অতিরিক্ত_রক্তপাত",
+      "বর্ধিত_যকৃত"
+    ],
+    "text_representation": "Disease: লিউকোমিয়া (Leukemia). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ওজন_কমা (Weight_Loss), ক্ষুধা_কমা (Loss_of_Appetite), দুর্বলতা (Weakness), ঘাম_হওয়া, বুকজ্বালা, অতিরিক্ত_রক্তপাত, বর্ধিত_যকৃত",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "সাইনোসাইটিস (Sinusitis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "শ্বাসকষ্ট (Shortness_of_Breath)",
+      "ফোলা",
+      "সর্দি",
+      "বুকজ্বালা",
+      "গলায়_শ্লেষ্মা",
+      "গন্ধ_ও_স্বাদের_অনুভূতি_কমে_যাওয়া",
+      "নাকের_প্রদাহ (Nasal_Inflammation)"
+    ],
+    "text_representation": "Disease: সাইনোসাইটিস (Sinusitis). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), শ্বাসকষ্ট (Shortness_of_Breath), ফোলা, সর্দি, বুকজ্বালা, গলায়_শ্লেষ্মা, গন্ধ_ও_স্বাদের_অনুভূতি_কমে_যাওয়া, নাকের_প্রদাহ (Nasal_Inflammation)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "সাধারণ সর্দি (Common Cold)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "তীব্র_জ্বর (High_Fever)",
+      "চোখ_লাল_হওয়া (Red_Eyes)",
+      "পেশী_ব্যথা (Muscle_Pain)",
+      "মাথা_ব্যথা (Headache)",
+      "বুকে_ব্যথা (Chest_Pain)",
+      "কফ্",
+      "কাশি (Cough)",
+      "সর্দি",
+      "বুকজ্বালা",
+      "একটানা_হাঁচি (Continuous_Sneezing)",
+      "ঠান্ডা (Cold)",
+      "রক্তজমা (Blood_Clot)",
+      "মানসিক_অস্থিরতা (Mental_Anxiety)"
+    ],
+    "text_representation": "Disease: সাধারণ সর্দি (Common Cold). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ক্লান্ত_বোধ (Fatigue), তীব্র_জ্বর (High_Fever), চোখ_লাল_হওয়া (Red_Eyes), পেশী_ব্যথা (Muscle_Pain), মাথা_ব্যথা (Headache), বুকে_ব্যথা (Chest_Pain), কফ্, কাশি (Cough), সর্দি, বুকজ্বালা, একটানা_হাঁচি (Continuous_Sneezing), ঠান্ডা (Cold), রক্তজমা (Blood_Clot), মানসিক_অস্থিরতা (Mental_Anxiety)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "সার্ভিকাল স্পন্ডাইলোসিস (Cervical Spondylosis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "মাথা_ঘোরা (Dizziness)",
+      "ভারসাম্য_হারা (Loss_of_Balance)",
+      "দুর্বলতা (Weakness)",
+      "পিঠে_ব্যথা (Back_Pain)",
+      "বুকজ্বালা",
+      "ঘাড়_ব্যথা"
+    ],
+    "text_representation": "Disease: সার্ভিকাল স্পন্ডাইলোসিস (Cervical Spondylosis). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), মাথা_ঘোরা (Dizziness), ভারসাম্য_হারা (Loss_of_Balance), দুর্বলতা (Weakness), পিঠে_ব্যথা (Back_Pain), বুকজ্বালা, ঘাড়_ব্যথা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "সোরিয়াসিস (Psoriasis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "নখে_ছোট_ছিদ্র (Small_Nail_Pits)",
+      "শুষ্ক_ত্বক (Dry_Skin)",
+      "ফুসকুড়ি (Blisters)",
+      "জয়েন্টে_ব্যথা (Joint_Pain)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: সোরিয়াসিস (Psoriasis). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), নখে_ছোট_ছিদ্র (Small_Nail_Pits), শুষ্ক_ত্বক (Dry_Skin), ফুসকুড়ি (Blisters), জয়েন্টে_ব্যথা (Joint_Pain), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "সোয়াইন ফ্লু (Swine Flu)",
+    "symptoms": [
+      "শরীর_ব্যথা (Body_Pain)",
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "জ্বর (Fever)",
+      "চোখ_দিয়ে_পানি_পড়া (Watery_Eyes)",
+      "মাথা_ব্যথা (Headache)",
+      "ডায়রিয়া (Diarrhea)",
+      "কাশি (Cough)",
+      "বমি_বমি_ভাব",
+      "গলা_ব্যথা",
+      "সর্দি",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: সোয়াইন ফ্লু (Swine Flu). Symptoms: শরীর_ব্যথা (Body_Pain), জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ক্লান্ত_বোধ (Fatigue), জ্বর (Fever), চোখ_দিয়ে_পানি_পড়া (Watery_Eyes), মাথা_ব্যথা (Headache), ডায়রিয়া (Diarrhea), কাশি (Cough), বমি_বমি_ভাব, গলা_ব্যথা, সর্দি, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "স্কার্ভি (Scurvy)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "বুকজ্বালা",
+      "কালচে_মাড়ি",
+      "ভঙ্গুর_মাড়ি",
+      "মাড়ি_ফুলে_ফেঁপে_ওঠে",
+      "মাড়ির_প্রদাহ",
+      "মাড়িতে_গর্ত"
+    ],
+    "text_representation": "Disease: স্কার্ভি (Scurvy). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), বুকজ্বালা, কালচে_মাড়ি, ভঙ্গুর_মাড়ি, মাড়ি_ফুলে_ফেঁপে_ওঠে, মাড়ির_প্রদাহ, মাড়িতে_গর্ত",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "স্ক্লেরোসিস (Sclerosis)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "স্মৃতিশক্তি_লোপ (Memory_Loss)",
+      "মাথা_ঘোরা (Dizziness)",
+      "মুখ_বাঁকা (Facial_Droop)",
+      "ঝাপসা_দৃষ্টি",
+      "পক্ষাঘাত",
+      "দ্বিগুণ_দৃষ্টি",
+      "পেশীর_দুর্বলতা",
+      "বুকজ্বালা",
+      "মূত্রাশয়ের_কর্মহীনতা",
+      "মানসিক_অস্থিরতা (Mental_Anxiety)"
+    ],
+    "text_representation": "Disease: স্ক্লেরোসিস (Sclerosis). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), স্মৃতিশক্তি_লোপ (Memory_Loss), মাথা_ঘোরা (Dizziness), মুখ_বাঁকা (Facial_Droop), ঝাপসা_দৃষ্টি, পক্ষাঘাত, দ্বিগুণ_দৃষ্টি, পেশীর_দুর্বলতা, বুকজ্বালা, মূত্রাশয়ের_কর্মহীনতা, মানসিক_অস্থিরতা (Mental_Anxiety)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "স্ট্রোক (Stroke)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "চোখে_সমস্যা (Eye_Problems)",
+      "অস্থিবাধা (Joint_Pain)",
+      "মাথা_ঘোরা (Dizziness)",
+      "ভারসাম্য_হারা (Loss_of_Balance)",
+      "কথা_জড়িয়ে_আসা (Slurred_Speech)",
+      "মুখ_বাঁকা (Facial_Droop)",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: স্ট্রোক (Stroke). Symptoms: জ্বলুনি (Burning_Sensation), চোখে_সমস্যা (Eye_Problems), অস্থিবাধা (Joint_Pain), মাথা_ঘোরা (Dizziness), ভারসাম্য_হারা (Loss_of_Balance), কথা_জড়িয়ে_আসা (Slurred_Speech), মুখ_বাঁকা (Facial_Droop), বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "হাইপারথাইরয়েডিজম (Hyperthyroidism)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অধিক_ক্ষুধা (Excessive_Hunger)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ওজন_কমা (Weight_Loss)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "দ্রুত_নাড়ি_স্পন্দন (Rapid_Pulse)",
+      "অস্বাভাবিক_ঋতুস্রাব (Abnormal_Menstruation)",
+      "ডায়রিয়া (Diarrhea)",
+      "ঘাম_হওয়া",
+      "পেশীর_দুর্বলতা",
+      "বুকজ্বালা",
+      "মেজাজের_তীব্র_পরিবর্তন"
+    ],
+    "text_representation": "Disease: হাইপারথাইরয়েডিজম (Hyperthyroidism). Symptoms: জ্বলুনি (Burning_Sensation), অধিক_ক্ষুধা (Excessive_Hunger), অস্থিবাধা (Joint_Pain), ওজন_কমা (Weight_Loss), ক্লান্ত_বোধ (Fatigue), দ্রুত_নাড়ি_স্পন্দন (Rapid_Pulse), অস্বাভাবিক_ঋতুস্রাব (Abnormal_Menstruation), ডায়রিয়া (Diarrhea), ঘাম_হওয়া, পেশীর_দুর্বলতা, বুকজ্বালা, মেজাজের_তীব্র_পরিবর্তন",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "হাইপোগ্লাইসেমিয়া (Hypoglycemia)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অধিক_ক্ষুধা (Excessive_Hunger)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "কথা_জড়িয়ে_আসা (Slurred_Speech)",
+      "পেট_ফোলা (Abdominal_Bloating)",
+      "বমি (Vomiting)",
+      "মাথা_ব্যথা (Headache)",
+      "বমি_বমি_ভাব",
+      "ঘাম_হওয়া",
+      "উদ্বেগ",
+      "বুকজ্বালা"
+    ],
+    "text_representation": "Disease: হাইপোগ্লাইসেমিয়া (Hypoglycemia). Symptoms: জ্বলুনি (Burning_Sensation), অধিক_ক্ষুধা (Excessive_Hunger), অস্থিবাধা (Joint_Pain), ক্লান্ত_বোধ (Fatigue), কথা_জড়িয়ে_আসা (Slurred_Speech), পেট_ফোলা (Abdominal_Bloating), বমি (Vomiting), মাথা_ব্যথা (Headache), বমি_বমি_ভাব, ঘাম_হওয়া, উদ্বেগ, বুকজ্বালা",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "হাইপোথাইরয়েডিজম (Hypothyroidism)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ওজন_বৃদ্ধি (Weight_Gain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "মাথা_ঘোরা (Dizziness)",
+      "অস্বাভাবিক_ঋতুস্রাব (Abnormal_Menstruation)",
+      "ফোলা",
+      "বুকজ্বালা",
+      "শরীর_ঠান্ডা_হয়ে_যাওয়া",
+      "মেজাজের_তীব্র_পরিবর্তন"
+    ],
+    "text_representation": "Disease: হাইপোথাইরয়েডিজম (Hypothyroidism). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ওজন_বৃদ্ধি (Weight_Gain), ক্লান্ত_বোধ (Fatigue), মাথা_ঘোরা (Dizziness), অস্বাভাবিক_ঋতুস্রাব (Abnormal_Menstruation), ফোলা, বুকজ্বালা, শরীর_ঠান্ডা_হয়ে_যাওয়া, মেজাজের_তীব্র_পরিবর্তন",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "হাম (Measles)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ফুসকুড়ি (Blisters)",
+      "জ্বর (Fever)",
+      "কাশি (Cough)",
+      "সর্দি",
+      "বুকজ্বালা",
+      "স্বরভঙ্গ",
+      "মুখে_সাদা_দাগ (White_Spots_on_Mouth)"
+    ],
+    "text_representation": "Disease: হাম (Measles). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ফুসকুড়ি (Blisters), জ্বর (Fever), কাশি (Cough), সর্দি, বুকজ্বালা, স্বরভঙ্গ, মুখে_সাদা_দাগ (White_Spots_on_Mouth)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "হার্ট অ্যাটাক (Heart Attack)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "শ্বাসকষ্ট (Shortness_of_Breath)",
+      "মাথা_ব্যথা (Headache)",
+      "বমি_বমি_ভাব",
+      "দ্রুত_শ্বাস_প্রশ্বাস",
+      "ভারীভাব",
+      "বুকের_মাঝে_চাপ_দিয়ে_ব্যথা",
+      "ঘাম_হওয়া",
+      "মাথা_ঝিম_ঝিম",
+      "বুকজ্বালা",
+      "মানসিক_অস্থিরতা (Mental_Anxiety)"
+    ],
+    "text_representation": "Disease: হার্ট অ্যাটাক (Heart Attack). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), শ্বাসকষ্ট (Shortness_of_Breath), মাথা_ব্যথা (Headache), বমি_বমি_ভাব, দ্রুত_শ্বাস_প্রশ্বাস, ভারীভাব, বুকের_মাঝে_চাপ_দিয়ে_ব্যথা, ঘাম_হওয়া, মাথা_ঝিম_ঝিম, বুকজ্বালা, মানসিক_অস্থিরতা (Mental_Anxiety)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "হিমোফিলিয়া (Hemophilia)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "বুকজ্বালা",
+      "নাভি_থেকে_রক্ত_পড়া",
+      "পায়ের_গোড়ালি_ফুলে_যাওয়া",
+      "গিরা_ফুলে_যাওয়া",
+      "অতিরিক্ত_রক্তপাত",
+      "কালশিটে_পড়া"
+    ],
+    "text_representation": "Disease: হিমোফিলিয়া (Hemophilia). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), বুকজ্বালা, নাভি_থেকে_রক্ত_পড়া, পায়ের_গোড়ালি_ফুলে_যাওয়া, গিরা_ফুলে_যাওয়া, অতিরিক্ত_রক্তপাত, কালশিটে_পড়া",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "হেপাটাইটিস ই (Hepatitis E)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "তীব্র_জ্বর (High_Fever)",
+      "ক্ষুধা_কমা (Loss_of_Appetite)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "বমি (Vomiting)",
+      "হলুদ_চোখ (Yellow_Eyes)",
+      "জয়েন্টে_ব্যথা (Joint_Pain)",
+      "বমি_বমি_ভাব",
+      "কোমা",
+      "বুকজ্বালা",
+      "হলুদ_ত্বক",
+      "গাঢ়_রঙের_প্রস্রাব"
+    ],
+    "text_representation": "Disease: হেপাটাইটিস ই (Hepatitis E). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ক্লান্ত_বোধ (Fatigue), তীব্র_জ্বর (High_Fever), ক্ষুধা_কমা (Loss_of_Appetite), পেট_ব্যথা (Abdominal_Pain), বমি (Vomiting), হলুদ_চোখ (Yellow_Eyes), জয়েন্টে_ব্যথা (Joint_Pain), বমি_বমি_ভাব, কোমা, বুকজ্বালা, হলুদ_ত্বক, গাঢ়_রঙের_প্রস্রাব",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "হেপাটাইটিস এ (Hepatitis A)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্ষুধা_কমা (Loss_of_Appetite)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "বমি (Vomiting)",
+      "জ্বর (Fever)",
+      "হলুদ_চোখ (Yellow_Eyes)",
+      "পেশী_ব্যথা (Muscle_Pain)",
+      "জয়েন্টে_ব্যথা (Joint_Pain)",
+      "ডায়রিয়া (Diarrhea)",
+      "বমি_বমি_ভাব",
+      "বুকজ্বালা",
+      "হলুদ_ত্বক",
+      "গাঢ়_রঙের_প্রস্রাব"
+    ],
+    "text_representation": "Disease: হেপাটাইটিস এ (Hepatitis A). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ক্ষুধা_কমা (Loss_of_Appetite), পেট_ব্যথা (Abdominal_Pain), বমি (Vomiting), জ্বর (Fever), হলুদ_চোখ (Yellow_Eyes), পেশী_ব্যথা (Muscle_Pain), জয়েন্টে_ব্যথা (Joint_Pain), ডায়রিয়া (Diarrhea), বমি_বমি_ভাব, বুকজ্বালা, হলুদ_ত্বক, গাঢ়_রঙের_প্রস্রাব",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "হেপাটাইটিস ডি (Hepatitis D)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "ক্ষুধা_কমা (Loss_of_Appetite)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "বমি (Vomiting)",
+      "হলুদ_চোখ (Yellow_Eyes)",
+      "জয়েন্টে_ব্যথা (Joint_Pain)",
+      "বমি_বমি_ভাব",
+      "বুকজ্বালা",
+      "হলুদ_ত্বক",
+      "গাঢ়_রঙের_প্রস্রাব"
+    ],
+    "text_representation": "Disease: হেপাটাইটিস ডি (Hepatitis D). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ক্লান্ত_বোধ (Fatigue), ক্ষুধা_কমা (Loss_of_Appetite), পেট_ব্যথা (Abdominal_Pain), বমি (Vomiting), হলুদ_চোখ (Yellow_Eyes), জয়েন্টে_ব্যথা (Joint_Pain), বমি_বমি_ভাব, বুকজ্বালা, হলুদ_ত্বক, গাঢ়_রঙের_প্রস্রাব",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "হেপাটাইটিস বি (Hepatitis B)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "চুলকানি (Itching)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "ক্ষুধা_কমা (Loss_of_Appetite)",
+      "পেট_ব্যথা (Abdominal_Pain)",
+      "হলুদ_চোখ (Yellow_Eyes)",
+      "বুকজ্বালা",
+      "হলুদ_ত্বক",
+      "গাঢ়_রঙের_প্রস্রাব",
+      "মানসিক_অস্থিরতা (Mental_Anxiety)"
+    ],
+    "text_representation": "Disease: হেপাটাইটিস বি (Hepatitis B). Symptoms: জ্বলুনি (Burning_Sensation), চুলকানি (Itching), অস্থিবাধা (Joint_Pain), ক্লান্ত_বোধ (Fatigue), ক্ষুধা_কমা (Loss_of_Appetite), পেট_ব্যথা (Abdominal_Pain), হলুদ_চোখ (Yellow_Eyes), বুকজ্বালা, হলুদ_ত্বক, গাঢ়_রঙের_প্রস্রাব, মানসিক_অস্থিরতা (Mental_Anxiety)",
+    "urgency_level": "URGENT"
+  },
+  {
+    "disease_name": "হেপাটাইটিস সি (Hepatitis C)",
+    "symptoms": [
+      "জ্বলুনি (Burning_Sensation)",
+      "অস্থিবাধা (Joint_Pain)",
+      "ক্লান্ত_বোধ (Fatigue)",
+      "ক্ষুধা_কমা (Loss_of_Appetite)",
+      "পারিবারিক_ইতিহাস (Family_History)",
+      "হলুদ_চোখ (Yellow_Eyes)",
+      "বমি_বমি_ভাব",
+      "বুকজ্বালা",
+      "হলুদ_ত্বক"
+    ],
+    "text_representation": "Disease: হেপাটাইটিস সি (Hepatitis C). Symptoms: জ্বলুনি (Burning_Sensation), অস্থিবাধা (Joint_Pain), ক্লান্ত_বোধ (Fatigue), ক্ষুধা_কমা (Loss_of_Appetite), পারিবারিক_ইতিহাস (Family_History), হলুদ_চোখ (Yellow_Eyes), বমি_বমি_ভাব, বুকজ্বালা, হলুদ_ত্বক",
+    "urgency_level": "URGENT"
+  }
+]

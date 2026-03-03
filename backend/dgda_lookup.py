@@ -1,186 +1,94 @@
-"""
-HealthMax — Layer 6: DGDA Drug Lookup
-Returns the cheapest generic medicine options for a given disease/indication
-from the Bangladesh DGDA 50,000-medicine registry dataset.
-
-Dataset: Mendeley 3x5gsr2jm3.1 (Bangladesh DGDA Medicine Registry)
-         Columns expected: brand_name, generic_name, indication, price_bdt, unit, manufacturer
-
-Collaborator instructions:
-    - Process the raw DGDA dataset in data/process_datasets.py and save a cleaned CSV.
-    - Implement lookup_drugs() — the primary function called by main.py.
-    - Return the top 3 cheapest generics for the given disease indication.
-    - Mark items below ৳5 per unit as "সাশ্রয়ী" (affordable) — FLEX feature.
-"""
-
-import logging
 import os
-from typing import Optional
-
 import pandas as pd
+from typing import List, Dict
 
-logger = logging.getLogger("healthmax.dgda")
-
-# ---------------------------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------------------------
-
-DGDA_CSV_PATH = os.environ.get(
-    "DGDA_CSV_PATH",
-    os.path.join(os.path.dirname(__file__), "..", "data", "dgda_medicines_clean.csv"),
-)
-
-# Price threshold for "affordable" flag (BDT per unit)
-AFFORDABLE_THRESHOLD_BDT = 5.0
-MAX_RESULTS = 3
-
-# ---------------------------------------------------------------------------
-# Data loading
-# ---------------------------------------------------------------------------
-
-_dgda_df: Optional[pd.DataFrame] = None
+_dgda_df = None
+DGDA_DATA_PATH = "data/raw/dgda_medicines.csv"
 
 
-def load_dgda_data() -> Optional[pd.DataFrame]:
-    """
-    Load and index the cleaned DGDA medicine dataset into memory.
-
-    Expected CSV columns:
-        brand_name, generic_name, indication, price_bdt, unit, manufacturer
-
-    TODO (collaborator):
-        1. Read the CSV with pd.read_csv(DGDA_CSV_PATH, encoding='utf-8').
-        2. Normalize text columns: lowercase, strip whitespace.
-        3. Create a combined 'indication_text' column merging generic_name + indication
-           for fuzzy search.
-        4. Cache in _dgda_df global.
-    """
+def _load_dgda_data():
     global _dgda_df
-
-    if _dgda_df is not None:
-        return _dgda_df
-
-    if not os.path.exists(DGDA_CSV_PATH):
-        logger.warning("DGDA CSV not found at %s. Run process_datasets.py first.", DGDA_CSV_PATH)
-        return None
-
-    try:
-        _dgda_df = pd.read_csv(DGDA_CSV_PATH, encoding="utf-8")
-        # Normalize
-        for col in ["brand_name", "generic_name", "indication"]:
-            if col in _dgda_df.columns:
-                _dgda_df[col] = _dgda_df[col].astype(str).str.strip().str.lower()
-        logger.info("DGDA dataset loaded: %d records", len(_dgda_df))
-    except Exception as e:
-        logger.error("Failed to load DGDA data: %s", e)
-        _dgda_df = None
-
+    if _dgda_df is None:
+        if not os.path.exists(DGDA_DATA_PATH):
+            print("[DGDA] Dataset not found. Using mock data for development.")
+            _dgda_df = _get_mock_data()
+        else:
+            print("[DGDA] Loading DGDA medicine dataset...")
+            _dgda_df = pd.read_csv(DGDA_DATA_PATH, encoding="utf-8")
+            # Normalize column names
+            _dgda_df.columns = [c.lower().strip().replace(" ", "_") for c in _dgda_df.columns]
+            print(f"[DGDA] Loaded {len(_dgda_df)} medicine records.")
     return _dgda_df
 
 
-# ---------------------------------------------------------------------------
-# Core lookup
-# ---------------------------------------------------------------------------
+def _get_mock_data() -> pd.DataFrame:
+    """Fallback mock data for development without the real DGDA dataset."""
+    return pd.DataFrame([
+        {"generic_name": "Paracetamol", "brand_name": "Napa", "indication": "Fever,Headache",
+         "price_bdt": 1.5, "unit": "tablet", "manufacturer": "Beximco"},
+        {"generic_name": "Amoxicillin", "brand_name": "Moxacil", "indication": "Pneumonia,Infection",
+         "price_bdt": 3.0, "unit": "capsule", "manufacturer": "Square"},
+        {"generic_name": "Metronidazole", "brand_name": "Amodis", "indication": "Gastroenteritis,Diarrhea",
+         "price_bdt": 2.0, "unit": "tablet", "manufacturer": "ACI"},
+        {"generic_name": "ORS Saline", "brand_name": "Gastrolyte", "indication": "Diarrhea,Dehydration",
+         "price_bdt": 5.0, "unit": "sachet", "manufacturer": "Renata"},
+        {"generic_name": "Cetirizine", "brand_name": "Alatrol", "indication": "Allergy,Cold",
+         "price_bdt": 1.0, "unit": "tablet", "manufacturer": "Drug International"},
+        {"generic_name": "Salbutamol", "brand_name": "Sultolin", "indication": "Asthma,Breathing difficulty",
+         "price_bdt": 2.5, "unit": "tablet", "manufacturer": "GlaxoSmithKline"},
+        {"generic_name": "Doxycycline", "brand_name": "Doxytet", "indication": "Typhoid,Malaria",
+         "price_bdt": 4.0, "unit": "capsule", "manufacturer": "Opsonin"},
+    ])
 
-def lookup_drugs(disease_name: str, max_results: int = MAX_RESULTS) -> list:
+
+# Mapping from Bangla disease names to English for lookup
+DISEASE_NAME_MAP = {
+    "জ্বর": "Fever",
+    "ডেঙ্গু": "Dengue",
+    "ম্যালেরিয়া": "Malaria",
+    "টাইফয়েড": "Typhoid",
+    "নিউমোনিয়া": "Pneumonia",
+    "ডায়রিয়া": "Diarrhea",
+    "গ্যাস্ট্রোএন্টেরাইটিস": "Gastroenteritis",
+    "হাঁপানি": "Asthma",
+    "অ্যালার্জি": "Allergy",
+    "ইউটিআই": "UTI",
+    "সর্দি": "Cold",
+}
+
+
+def lookup_drugs(disease_name: str, top_n: int = 3) -> List[Dict]:
     """
-    Find the cheapest generic medicines for a given disease or indication.
-
-    Args:
-        disease_name: Disease or indication string (English or Bangla).
-                      This is matched against the 'indication' and 'generic_name' columns.
-        max_results:  Maximum number of drug entries to return.
-
-    Returns:
-        List of dicts, sorted by price (cheapest first):
-            [
-                {
-                    'generic_name':  str,   # Generic medicine name
-                    'brand_example': str,   # One example brand name
-                    'price_bdt':     float, # Price in BDT per unit
-                    'unit':          str,   # 'tablet', 'ml', etc.
-                    'affordable':    bool,  # True if price < AFFORDABLE_THRESHOLD_BDT
-                },
-                ...
-            ]
-        Returns a safe fallback message list if no match found or data not loaded.
-
-    TODO (collaborator):
-        1. Load data via load_dgda_data().
-        2. Filter rows where 'indication' contains disease_name (case-insensitive).
-        3. If no exact match, try fuzzy matching with rapidfuzz (threshold: 70).
-        4. Sort filtered rows by price_bdt ascending.
-        5. Group by generic_name and take cheapest price per generic.
-        6. Return top max_results records with the affordable flag set.
+    Query DGDA dataset to find cheapest generic medicines for a disease.
+    Returns list of drug dicts: generic_name, brand_name, price_bdt, unit, affordable
     """
-    df = load_dgda_data()
+    df = _load_dgda_data()
 
-    if df is None or disease_name.strip() == "":
-        logger.warning("No DGDA data or empty disease name; returning fallback.")
-        return _fallback_drugs()
+    # Translate Bangla to English if needed
+    search_term = DISEASE_NAME_MAP.get(disease_name, disease_name)
 
-    try:
-        disease_lower = disease_name.strip().lower()
+    # Search by indication (case-insensitive partial match)
+    mask = df["indication"].str.contains(search_term, case=False, na=False)
+    matched = df[mask].copy()
 
-        # Simple substring match — collaborator should upgrade to fuzzy
-        mask = df["indication"].str.contains(disease_lower, na=False, case=False)
-        matched = df[mask].copy()
+    if matched.empty:
+        # Fallback: Paracetamol + ORS are always safe to recommend for general symptoms
+        fallback = df[df["generic_name"].str.contains("Paracetamol|ORS", case=False, na=False)]
+        matched = fallback.copy()
 
-        if matched.empty:
-            logger.info("No DGDA match for '%s'; returning fallback.", disease_name)
-            return _fallback_drugs()
+    # Sort by price ascending (cheapest first)
+    matched = matched.sort_values("price_bdt", ascending=True).head(top_n)
 
-        # Sort by price
-        if "price_bdt" in matched.columns:
-            matched = matched.sort_values("price_bdt")
+    results = []
+    for _, row in matched.iterrows():
+        price = float(row.get("price_bdt", 0))
+        results.append({
+            "generic_name": row.get("generic_name", ""),
+            "brand_example": row.get("brand_name", ""),
+            "price_bdt": price,
+            "unit": row.get("unit", "tablet"),
+            "affordable": price <= 5.0,
+            "affordable_label": "সাশ্রয়ী 💚" if price <= 5.0 else "মধ্যম মূল্য"
+        })
 
-        # Deduplicate by generic_name — keep cheapest
-        matched = matched.drop_duplicates(subset=["generic_name"], keep="first")
-        matched = matched.head(max_results)
-
-        results = []
-        for _, row in matched.iterrows():
-            price = float(row.get("price_bdt", 0.0))
-            results.append({
-                "generic_name":  row.get("generic_name", ""),
-                "brand_example": row.get("brand_name", ""),
-                "price_bdt":     price,
-                "unit":          row.get("unit", "tablet"),
-                "affordable":    price < AFFORDABLE_THRESHOLD_BDT,
-            })
-        return results
-
-    except Exception as e:
-        logger.exception("Drug lookup failed: %s", e)
-        return _fallback_drugs()
-
-
-def _fallback_drugs() -> list:
-    """
-    Return a safe fallback drug suggestion when lookup fails.
-    Uses Paracetamol as the universal symptomatic fallback.
-    """
-    return [
-        {
-            "generic_name":  "Paracetamol (প্যারাসিটামল)",
-            "brand_example": "Napa / Ace",
-            "price_bdt":     2.50,
-            "unit":          "tablet",
-            "affordable":    True,
-        }
-    ]
-
-
-# ---------------------------------------------------------------------------
-# Dev test
-# ---------------------------------------------------------------------------
-
-if __name__ == "__main__":
-    load_dgda_data()
-    diseases = ["dengue", "typhoid", "gastroenteritis"]
-    for d in diseases:
-        drugs = lookup_drugs(d)
-        print(f"\n{d}:")
-        for drug in drugs:
-            flag = "সাশ্রয়ী ✅" if drug["affordable"] else ""
-            print(f"  {drug['generic_name']} ({drug['brand_example']}) — ৳{drug['price_bdt']}/{drug['unit']} {flag}")
+    return results

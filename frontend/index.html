@@ -1,128 +1,108 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HealthMax — বাংলা স্বাস্থ্য ট্রিয়াজ</title>
-    <link rel="stylesheet" href="style.css" />
-    <!-- Chart.js for disease probability bars -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthMax — বাংলা স্বাস্থ্য তথ্য</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-
 <body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">🏥 HealthMax</div>
+      <div class="tagline">বাংলা AI স্বাস্থ্য তথ্য সহায়তা | Harvard HSIL 2026</div>
+    </div>
+  </header>
 
-    <!-- ===== Header ===== -->
-    <header class="hm-header">
-        <div class="hm-logo">HealthMax</div>
-        <div class="hm-tagline">বাংলা AI স্বাস্থ্য ট্রিয়াজ সিস্টেম</div>
-        <div class="hm-lang-toggle">
-            <span class="lang-active">বাংলা</span> | <span>English</span>
+  <main>
+    <!-- Input Section -->
+    <section class="input-section card">
+      <h2>আপনার উপসর্গ জানান</h2>
+      <p class="subtitle">বাংলায় টাইপ করুন অথবা ভয়েস রেকর্ড করুন</p>
+
+      <div class="input-group">
+        <textarea
+          id="symptom-input"
+          placeholder="যেমন: তিন দিন ধরে জ্বর, মাথাব্যথা, চোখ লাল, গা ব্যথা..."
+          rows="4"
+        ></textarea>
+        <div class="btn-row">
+          <button id="submit-btn" class="btn-primary" onclick="submitText()">
+            🔍 তথ্য নিন
+          </button>
+          <button id="record-btn" class="btn-voice" onclick="toggleRecording()">
+            🎤 ভয়েস রেকর্ড
+          </button>
         </div>
-    </header>
+      </div>
 
-    <!-- ===== Main container ===== -->
-    <main class="hm-main">
+      <!-- Recording indicator -->
+      <div id="recording-indicator" class="hidden">
+        <div class="pulse-dot"></div>
+        <span>রেকর্ড হচ্ছে... বলুন</span>
+      </div>
 
-        <!-- Input panel -->
-        <section class="hm-input-panel card">
-            <h2>আপনার লক্ষণ বলুন বা লিখুন</h2>
-            <p class="hint">যেমন: "তিন দিন ধরে জ্বর, মাথাব্যথা, চোখ লাল"</p>
+      <!-- ASR Transcript -->
+      <div id="transcript-box" class="hidden">
+        <label>📝 আপনার কথা (ASR):</label>
+        <p id="transcript-text"></p>
+      </div>
+    </section>
 
-            <!-- Voice recording button -->
-            <div class="hm-voice-section">
-                <button id="btn-record" class="btn btn-primary btn-record" title="ভয়েস রেকর্ড করুন">
-                    🎤 <span id="btn-record-label">কথা বলুন</span>
-                </button>
-                <span id="record-status" class="record-status" aria-live="polite"></span>
-            </div>
+    <!-- Loading -->
+    <div id="loading" class="hidden">
+      <div class="spinner"></div>
+      <p>বিশ্লেষণ হচ্ছে...</p>
+    </div>
 
-            <!-- Text input fallback -->
-            <div class="hm-text-section">
-                <textarea id="symptom-input" class="hm-textarea" rows="3" placeholder="এখানে লক্ষণ লিখুন..."
-                    aria-label="লক্ষণ টেক্সট ইনপুট"></textarea>
-                <button id="btn-submit" class="btn btn-primary">
-                    🔍 বিশ্লেষণ করুন
-                </button>
-            </div>
+    <!-- Results Section -->
+    <section id="results" class="hidden">
 
-            <!-- Live ASR transcript display -->
-            <div id="transcript-box" class="transcript-box hidden" aria-live="polite">
-                <span class="transcript-label">শনাক্ত কথা: </span>
-                <span id="transcript-text"></span>
-            </div>
-        </section>
+      <!-- Emergency Banner -->
+      <div id="emergency-banner" class="emergency-banner hidden">
+        🚨 <strong>জরুরি অবস্থা!</strong> এখনই <strong>৯৯৯</strong> কল করুন অথবা জেলা হাসপাতালে যান!
+      </div>
 
-        <!-- Loading spinner (hidden by default) -->
-        <div id="loading-spinner" class="loading-spinner hidden" aria-label="প্রক্রিয়া হচ্ছে">
-            <div class="spinner"></div>
-            <p>বিশ্লেষণ চলছে...</p>
+      <!-- NER Entities -->
+      <div class="card ner-card">
+        <h3>🔬 শনাক্ত উপসর্গ</h3>
+        <div id="ner-entities"></div>
+      </div>
+
+      <!-- Disease Predictions -->
+      <div class="card">
+        <h3>✅ সম্ভাব্য রোগ</h3>
+        <canvas id="disease-chart" height="200"></canvas>
+      </div>
+
+      <!-- Urgency + Facility -->
+      <div class="card-row">
+        <div class="card urgency-card">
+          <h3>⚡ জরুরি মাত্রা</h3>
+          <div id="urgency-badge" class="urgency-badge"></div>
         </div>
+        <div class="card facility-card">
+          <h3>🏥 যোগাযোগ করুন</h3>
+          <p id="facility-text"></p>
+        </div>
+      </div>
 
-        <!-- ===== Results panel (hidden until response received) ===== -->
-        <section id="results-panel" class="hm-results hidden">
+      <!-- Drug Recommendations -->
+      <div class="card">
+        <h3>💊 প্রস্তাবিত ওষুধ</h3>
+        <div id="drug-cards"></div>
+      </div>
 
-            <!-- NER entity visualization -->
-            <!-- Symptom entities = blue, Disease entities = red, Medicine entities = green -->
-            <div class="card ner-card">
-                <h3>🔬 শনাক্ত লক্ষণ</h3>
-                <div id="ner-display" class="ner-display" aria-label="শনাক্ত এনটিটি"></div>
-            </div>
+      <!-- LLM Response -->
+      <div class="card">
+        <h3>📋 CHW পরামর্শ</h3>
+        <div id="llm-response" class="llm-box"></div>
+        <div class="disclaimer">⚠️ এটি পরামর্শ, ডাক্তারের বিকল্প নয়।</div>
+      </div>
+    </section>
+  </main>
 
-            <!-- Disease probability bar chart -->
-            <div class="card chart-card">
-                <h3>📊 সম্ভাব্য রোগ</h3>
-                <canvas id="disease-chart" height="160" aria-label="রোগ সম্ভাব্যতা চার্ট"></canvas>
-            </div>
-
-            <!-- Urgency badge -->
-            <div class="card urgency-card">
-                <h3>🚨 জরুরি মাত্রা</h3>
-                <div id="urgency-badge" class="urgency-badge" aria-live="assertive"></div>
-            </div>
-
-            <!-- Facility recommendation -->
-            <div class="card facility-card">
-                <h3>🏥 পরামর্শিত স্বাস্থ্য সুবিধা</h3>
-                <p id="facility-text" class="facility-text"></p>
-            </div>
-
-            <!-- Drug recommendations -->
-            <div class="card drug-card">
-                <h3>💊 প্রস্তাবিত ওষুধ (DGDA)</h3>
-                <ul id="drug-list" class="drug-list"></ul>
-            </div>
-
-            <!-- Full LLM response -->
-            <div class="card response-card">
-                <h3>📋 পূর্ণ পরামর্শ</h3>
-                <div id="full-response" class="full-response"></div>
-                <!-- TTS playback button (FLEX feature) -->
-                <button id="btn-tts" class="btn btn-secondary" title="উত্তর শুনুন">
-                    🔊 শুনুন
-                </button>
-                <audio id="tts-player" hidden></audio>
-            </div>
-
-            <!-- Disclaimer -->
-            <div class="disclaimer" role="note">
-                ⚠️ এটি পরামর্শ, ডাক্তারের বিকল্প নয়।
-            </div>
-
-            <!-- Reset button -->
-            <button id="btn-reset" class="btn btn-secondary btn-reset">
-                🔄 নতুন প্রশ্ন করুন
-            </button>
-        </section>
-
-    </main>
-
-    <!-- ===== Footer ===== -->
-    <footer class="hm-footer">
-        <p>Harvard HSIL Hackathon 2026 · HealthMax · Powered by BanglaBERT + GPT-4o + DGDA</p>
-    </footer>
-
-    <script src="demo.js"></script>
+  <script src="/static/demo.js"></script>
 </body>
-
 </html>

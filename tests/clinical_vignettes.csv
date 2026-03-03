@@ -1,4 +1,4 @@
-id,input_bn,expected_urgency,notes
+scenario_id,input_bangla,expected_disease,expected_urgency,notes
 1,বুকে ব্যথা, শ্বাস কষ্ট,EMERGENCY,Cardiac emergency — rule must override to EMERGENCY
 2,তিন দিন জ্বর, মাথাব্যথা, চোখ লাল, গা ব্যথা,URGENT,Dengue / Typhoid presentation
 3,পেটব্যথা, বমি, পাতলা পায়খানা,URGENT,Gastroenteritis

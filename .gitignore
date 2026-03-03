@@ -16,7 +16,7 @@ build/
 venv/
 
 # Raw datasets (too large for git; stored in S3)
-data/raw/
+# data/raw/
 
 # Trained model artifacts (stored in S3; regenerated locally)
 models/disease_rag.index
