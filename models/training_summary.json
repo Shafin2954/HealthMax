@@ -1,0 +1,19 @@
+{
+  "macro_f1": 0.7255050505050504,
+  "num_diseases": 85,
+  "num_symptoms": 166,
+  "num_rows": 757,
+  "train_samples": 605,
+  "test_samples": 152,
+  "split_mode": "stratified",
+  "xgboost_device": "cuda",
+  "cuda_available": true,
+  "cuda_device_name": "NVIDIA GeForce RTX 3070 Ti Laptop GPU",
+  "num_retrieval_records": 85,
+  "rag_vector_dim": 384,
+  "rag_backend": "sentence-transformers",
+  "rag_embedding_model": "paraphrase-multilingual-MiniLM-L12-v2",
+  "rag_embedding_device": "cuda",
+  "rag_vectorizer_path": null,
+  "faiss_device": "cpu"
+}

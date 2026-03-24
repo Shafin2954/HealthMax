@@ -1,0 +1,6 @@
+{
+  "backend": "sentence-transformers",
+  "embedding_model": "paraphrase-multilingual-MiniLM-L12-v2",
+  "embedding_device": "cuda",
+  "vectorizer_path": null
+}

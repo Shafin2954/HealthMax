@@ -25,6 +25,15 @@ models/disease_classifier.json
 models/symptom_binarizer.json
 models/disease_label_encoder.json
 
+models/*.pkl
+models/ner-banglabert-medical/*.safetensors
+models/ner-banglabert-medical/checkpoint-*/
+models/ner-banglabert-medical/optimizer.pt
+models/ner-banglabert-medical/rng_state.pth
+models/ner-banglabert-medical/scheduler.pt
+
+
+
 # Cleaned data outputs
 data/dgda_medicines_clean.csv
 

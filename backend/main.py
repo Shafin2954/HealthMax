@@ -1,28 +1,22 @@
-
-***
-
-## 📁 `backend/`
-
-### `backend/main.py`
-```python
 import os
-import io
-from fastapi import FastAPI, Request, UploadFile, File, Form
+
+from fastapi import FastAPI, File, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse, JSONResponse
-from pydantic import BaseModel
-from twilio.twiml.messaging_response import MessagingResponse
 from dotenv import load_dotenv
+from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
+from starlette.datastructures import FormData
+from twilio.twiml.messaging_response import MessagingResponse
 
 from backend.asr import transcribe_audio
 from backend.ner import extract_symptoms
-from backend.rag import retrieve_diseases
+from backend.rag import get_disease_records, retrieve_diseases
 from backend.classifier import predict_diseases
+from backend.fusion import merge_disease_predictions
 from backend.rules import apply_triage_rules
 from backend.dgda_lookup import lookup_drugs
 from backend.generator import generate_response
-from backend.tts import text_to_speech_bangla
 
 load_dotenv()
 
@@ -45,6 +39,40 @@ app.mount("/static", StaticFiles(directory="frontend"), name="static")
 class TextTriageRequest(BaseModel):
     text: str
     language: str = "bn"
+
+
+def _get_form_text(form_data: FormData, field_name: str) -> str:
+    value = form_data.get(field_name)
+    return value.strip() if isinstance(value, str) else ""
+
+
+def _to_lovable_diseases(top_diseases: list[dict]) -> list[dict]:
+    diseases = []
+    for disease in top_diseases:
+        name = str(disease.get("disease", "Unknown"))
+        probability = float(disease.get("probability", 0.0))
+        confidence = probability * 100 if probability <= 1 else probability
+        diseases.append(
+            {
+                "name": name,
+                "name_bn": name,
+                "confidence": round(confidence, 2),
+            }
+        )
+    return diseases
+
+
+def _to_lovable_medicines(drug_recommendations: list[dict]) -> list[dict]:
+    medicines = []
+    for drug in drug_recommendations:
+        medicines.append(
+            {
+                "name": str(drug.get("brand_example", "")),
+                "generic": str(drug.get("generic_name", "")),
+                "price": f"৳{float(drug.get('price_bdt', 0.0)):.2f} / {drug.get('unit', 'unit')}",
+            }
+        )
+    return medicines
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -108,8 +136,8 @@ async def whatsapp_webhook(request: Request):
     Receives WhatsApp messages and returns triage response.
     """
     form_data = await request.form()
-    incoming_msg = form_data.get("Body", "").strip()
-    media_url = form_data.get("MediaUrl0", None)
+    incoming_msg = _get_form_text(form_data, "Body")
+    media_url = _get_form_text(form_data, "MediaUrl0") or None
 
     twiml_response = MessagingResponse()
 
@@ -123,10 +151,15 @@ async def whatsapp_webhook(request: Request):
     try:
         if media_url:
             import httpx
+
+            account_sid = os.getenv("TWILIO_ACCOUNT_SID")
+            auth_token = os.getenv("TWILIO_AUTH_TOKEN")
+            auth = (account_sid, auth_token) if account_sid and auth_token else None
+
             async with httpx.AsyncClient() as client:
                 audio_response = await client.get(
                     media_url,
-                    auth=(os.getenv("TWILIO_ACCOUNT_SID"), os.getenv("TWILIO_AUTH_TOKEN"))
+                    auth=auth,
                 )
             transcript, confidence = transcribe_audio(audio_response.content)
             if confidence < 0.4:
@@ -142,7 +175,7 @@ async def whatsapp_webhook(request: Request):
         formatted = format_whatsapp_response(result)
         twiml_response.message(formatted)
 
-    except Exception as e:
+    except Exception:
         twiml_response.message(
             "দুঃখিত, একটি সমস্যা হয়েছে। আবার চেষ্টা করুন অথবা সরাসরি ডাক্তারের সাথে যোগাযোগ করুন।"
         )
@@ -156,25 +189,36 @@ async def run_triage_pipeline(text: str) -> dict:
     """
     # Layer 2: NER — Extract symptoms/diseases/medicines from text
     ner_entities = extract_symptoms(text)
-    symptoms = ner_entities.get("symptoms", [])
-    mentioned_diseases = ner_entities.get("diseases", [])
+    symptoms = [str(symptom) for symptom in ner_entities.get("symptoms", [])]
+    disease_mentions = [str(disease) for disease in ner_entities.get("diseases", [])]
 
     # Layer 3: RAG — Retrieve top-5 matching diseases from FAISS
-    rag_results = retrieve_diseases(text, top_k=5)
+    ranking_terms = symptoms + disease_mentions
+    retrieval_query = ", ".join(ranking_terms) if ranking_terms else text
+    rag_results = retrieve_diseases(retrieval_query, top_k=5) if ranking_terms else []
 
     # Layer 4: Classifier — XGBoost top-3 disease predictions
-    classifier_results = predict_diseases(symptoms)
+    classifier_results = predict_diseases(symptoms, top_n=5) if symptoms else []
+    merged_predictions = merge_disease_predictions(
+        symptoms=symptoms,
+        disease_mentions=disease_mentions,
+        classifier_results=classifier_results,
+        rag_results=rag_results,
+        all_disease_records=get_disease_records(),
+        top_n=3,
+    )
 
     # Layer 6: Rules — Hard clinical override (emergency check FIRST)
     triage_decision = apply_triage_rules(
         text=text,
         symptoms=symptoms,
         classifier_results=classifier_results,
-        rag_results=rag_results
+        rag_results=rag_results,
+        merged_results=merged_predictions,
     )
 
     # Layer 7: Drug Lookup — DGDA cheapest generics
-    top_disease = triage_decision.get("top_disease", "")
+    top_disease = str(triage_decision.get("top_disease", ""))
     drug_recommendations = lookup_drugs(top_disease)
 
     # Layer 5: LLM — Generate natural Bangla response
@@ -187,15 +231,35 @@ async def run_triage_pipeline(text: str) -> dict:
         rag_results=rag_results
     )
 
+    top_diseases = triage_decision.get("top_diseases", [])
+    top_prediction = top_diseases[0] if top_diseases else {}
+    specialist = str(top_prediction.get("specialist", "")) or (
+        str(rag_results[0].get("specialist", "")) if rag_results else "General Physician"
+    ) or "General Physician"
+    facility_recommendation = str(
+        triage_decision.get("facility", "উপজেলা স্বাস্থ্য কমপ্লেক্স")
+    )
+    lovable_diseases = _to_lovable_diseases(top_diseases)
+    lovable_medicines = _to_lovable_medicines(drug_recommendations)
+
     return {
         "input_text": text,
         "ner_entities": ner_entities,
-        "top_diseases": triage_decision.get("top_diseases", []),
+        "top_diseases": top_diseases,
+        "diseases": lovable_diseases,
         "urgency_level": triage_decision.get("urgency_level", "URGENT"),
         "urgency_label_bn": triage_decision.get("urgency_label_bn", "জরুরি"),
-        "facility_recommendation": triage_decision.get("facility", "উপজেলা স্বাস্থ্য কমপ্লেক্স"),
+        "facility_recommendation": facility_recommendation,
+        "recommended_facility": facility_recommendation,
+        "recommended_facility_bn": facility_recommendation,
+        "specialist": specialist,
         "drug_recommendations": drug_recommendations,
+        "medicines": lovable_medicines,
         "llm_response": llm_response,
+        "explanation": llm_response,
+        "explanation_bn": llm_response,
+        "ml_classifier_used": True,
+        "ai_fallback": True,
         "emergency_override": triage_decision.get("emergency_override", False),
         "disclaimer": "⚠️ এটি পরামর্শ, ডাক্তারের বিকল্প নয়।"
     }

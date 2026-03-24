@@ -16,6 +16,8 @@ twilio==9.2.1               # WhatsApp / SMS webhook
 torch==2.3.0                # PyTorch — CPU build; for GPU on EC2 use torch+cu118
 transformers==4.41.0        # HuggingFace Transformers (BanglaBERT, Whisper)
 datasets==2.19.2            # HuggingFace Datasets (for NER fine-tuning)
+accelerate==1.12.0          # Trainer runtime for local GPU fine-tuning
+seqeval==1.2.2              # Entity-level F1 for NER evaluation
 tokenizers==0.19.1
 sentence-transformers==3.0.1 # paraphrase-multilingual-MiniLM embeddings
 faiss-cpu==1.8.0            # FAISS vector store (use faiss-gpu on GPU instance)
