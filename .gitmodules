@@ -1,0 +1,3 @@
+[submodule "healthmax-ai-assistant"]
+	path = healthmax-ai-assistant
+	url = https://github.com/jawatalsovon/healthmax-ai-assistant.git
