@@ -138,6 +138,21 @@ HealthMax/
 
 ## Local run
 
+### Python version first
+
+Use `Python 3.12` for this pinned backend stack.
+
+If you try `Python 3.13`, install can fail on `torch==2.3.0` and possibly other pinned ML wheels.
+
+Recommended Windows setup:
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
 ### 1. Start the backend
 
 From the repo root:

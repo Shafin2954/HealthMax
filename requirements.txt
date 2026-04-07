@@ -1,6 +1,9 @@
 # HealthMax — Python Dependencies
 # Install with: pip install -r requirements.txt
-# Python >= 3.10 required.
+# Recommended Python: 3.12
+# Supported Python range for this pinned stack: >= 3.10, < 3.13
+# Python 3.13 fails on the current pinned ML stack, starting with torch==2.3.0.
+# On Windows, create a Python 3.12 virtual environment before installing.
 
 # ---------------------------------------------------------------------------
 # Web framework & server
