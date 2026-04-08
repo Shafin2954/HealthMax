@@ -1,0 +1,9 @@
+name: healthmax312
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - nodejs
+  - pip
+  - pip:
+      - -r requirements.txt
