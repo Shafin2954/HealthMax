@@ -1,7 +1,7 @@
 param(
     [string]$PythonExe = "C:\Users\user\anaconda3\envs\healthmax312\python.exe",
-    [string]$Host = "127.0.0.1",
-    [int]$Port = 8000
+    [string]$BindHost = "127.0.0.1",
+    [int]$BindPort = 8000
 )
 
 $ErrorActionPreference = "Stop"
@@ -15,4 +15,4 @@ $env:HF_HOME = $hfHome
 $env:TRANSFORMERS_CACHE = $hfHome
 
 Set-Location $repoRoot
-& $PythonExe -m uvicorn backend.main:app --host $Host --port $Port
+& $PythonExe -m uvicorn backend.main:app --host $BindHost --port $BindPort
