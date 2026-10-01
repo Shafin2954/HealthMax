@@ -133,12 +133,12 @@ def apply_triage_rules(
 
     urgency = "SELF-CARE"
     if top_prediction and top_probability >= 0.20:
-        top_disease = str(top_prediction["disease"])
-        high_urgency_diseases = [
-            "Dengue", "Typhoid", "Pneumonia", "Malaria", "Cholera",
-            "ডেঙ্গু", "টাইফয়েড", "নিউমোনিয়া", "ম্যালেরিয়া", "ম্যালেরিয়া", "কলেরা"
-        ]
-        if any(d in top_disease for d in high_urgency_diseases):
+        record_urgency = str(top_prediction.get("urgency") or "").upper()
+        if record_urgency in URGENCY_BANGLA:
+            urgency = record_urgency
+        elif rag_results:
+            urgency = _record_urgency(rag_results[0])
+        else:
             urgency = "URGENT"
     elif rag_results:
         urgency = _record_urgency(rag_results[0])
