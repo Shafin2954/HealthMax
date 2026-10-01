@@ -4,14 +4,21 @@
 
 ## Current state
 
-HealthMax now has a working **local end-to-end path**:
+HealthMax has two parallel triage paths:
 
-- the Lovable app at `healthmax-ai-assistant`
-- calls the local FastAPI backend
-- which runs NER, disease retrieval, classification, rules, and medicine lookup
-- and returns structured Bangla triage results
+- the FastAPI backend (`backend/`), which runs NER, disease retrieval,
+  classification, rules, and medicine lookup, and returns structured
+  Bangla triage results
+- the Lovable app's own **client-side** triage engine
+  (`healthmax-ai-assistant/src/lib/browserTriage.ts`), a TypeScript
+  reimplementation of the same NER/RAG/classifier/rules pipeline that
+  runs entirely in the browser
 
-This path has been verified in a real local browser session.
+As of the current `Triage.tsx`, the `/triage` page calls
+`runBrowserTriage()` directly — it does **not** call the FastAPI
+backend. The two pipelines are logically equivalent but are
+maintained as separate codebases, so a fix made in one (e.g. a rules
+bug) must be mirrored in the other.
 
 What is **not** finished yet:
 
@@ -20,6 +27,7 @@ What is **not** finished yet:
 - future public hosting choice, if needed
 - gold-label NER data
 - higher-quality disease ranking on ambiguous fever cases
+- reconciling the backend and browser triage pipelines into one path
 
 ## What works now
 
@@ -35,7 +43,7 @@ What is **not** finished yet:
 
 ### Local Lovable app
 
-- the Lovable `/triage` page posts directly to `http://127.0.0.1:8000/api/triage`
+- the Lovable `/triage` page runs `runBrowserTriage()` client-side
 - model-backed results render in the browser
 - the app can show:
   - top diseases
@@ -153,7 +161,7 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 1. Start the backend
+### 1. Start the backend (optional — the Lovable app no longer calls it)
 
 From the repo root:
 
@@ -169,29 +177,33 @@ From `healthmax-ai-assistant`:
 npm run dev
 ```
 
+The dev server runs on port `8080` (set in `vite.config.ts`), not Vite's
+default `5173`.
+
 ### 3. Open in browser
 
-- backend health: `http://127.0.0.1:8000/health`
-- Lovable triage page: `http://127.0.0.1:5173/triage`
+- backend health (if running): `http://127.0.0.1:8000/health`
+- Lovable triage page: `http://127.0.0.1:8080/triage`
 
-If you run preview instead of dev:
+If you run preview instead of dev, Vite still serves it on `8080`
+unless overridden.
 
-- `http://127.0.0.1:4173/triage`
+### 4. Verify the triage pipeline
 
-### 4. Verify the app is using the model backend
+The `/triage` page runs `runBrowserTriage()` from
+`src/lib/browserTriage.ts` entirely client-side — no network call to
+the FastAPI backend is involved. Submit a triage prompt and check the
+rendered result contains:
 
-Open browser DevTools -> `Network`, then submit a triage prompt.
-
-You should see:
-
-- `POST http://127.0.0.1:8000/api/triage`
-
-The response should contain:
-
-- `ner_entities`
-- `top_diseases`
+- matched symptoms/diseases
 - `urgency_level`
-- `medicines`
+- a facility recommendation
+- medicine suggestions
+
+To exercise the FastAPI backend's equivalent pipeline instead (e.g.
+for the WhatsApp/voice paths, which do use it), call
+`POST http://127.0.0.1:8000/api/triage` directly and check for
+`ner_entities`, `top_diseases`, `urgency_level`, `medicines`.
 
 ## Example manual test prompts
 
