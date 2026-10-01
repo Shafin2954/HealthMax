@@ -46,6 +46,9 @@ tests/dialect_test_audio/
 # TTS test output
 backend/test_tts_output.mp3
 
+# Hugging Face / model download cache (large binaries, regenerated locally)
+.cache/
+
 # OS
 .DS_Store
 Thumbs.db
