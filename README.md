@@ -124,4 +124,4 @@ docs/                    architecture, models & data, evaluation, post-mortem, a
 
 ## License
 
-Code: [MIT](LICENSE). Datasets, base models and fonts keep their own licenses (listed in [LICENSE](LICENSE)). Not a medical device, and nothing here is medical advice.
+Code: [MIT](LICENSE). Datasets, base models and fonts keep their own licenses (listed in [NOTICE](NOTICE)). Not a medical device, and nothing here is medical advice.
