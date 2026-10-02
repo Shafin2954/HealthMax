@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="96" viewBox="0 0 320 96">
+  <!-- Pulse line drawn as a kantha running stitch: care that mends. Tile seamlessly. -->
+  <g fill="none" stroke="#0B4F6C" stroke-opacity=".2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6">
+    <path d="M0 24h96l7-15 9 30 7-15h201"/>
+    <path d="M0 72h256l7-15 9 30 7-15h41"/>
+  </g>
+</svg>

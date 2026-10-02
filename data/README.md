@@ -1,4 +1,6 @@
-# HealthMax — Dataset Download Guide
+# HealthMax — Dataset Download Guide (original plan)
+
+> **Note (2026-10):** this is the original download plan. Only the Bangla symptoms–disease dataset (`data/raw/Symptoms.csv`) and the DGDA medicine list (`assets/medicine.csv`) were actually used. See [docs/MODELS_AND_DATA.md](../docs/MODELS_AND_DATA.md).
 
 Download ALL datasets before running `process_datasets.py`.
 Save them to `data/raw/` with the filename shown.

@@ -1,325 +1,127 @@
-# HealthMax
+<p align="center">
+  <img src="docs/images/banner.png" alt="HealthMax: Bangla AI health triage" width="100%">
+</p>
 
-**Bangla AI Health Triage System** for symptom-based triage, medicine lookup, and facility guidance.
+<p align="center">
+  <b>Bangla, voice-first AI health triage for rural Bangladesh.</b><br>
+  Built for the Harvard HSIL Hackathon 2026 · <b>Archived October 2026</b>
+</p>
 
-## Current state
+> [!WARNING]
+> **Research prototype. Not a medical device. Do not use it for real health decisions.**
+> On our own 50-case benchmark it caught only 9 of 17 emergencies ([evaluation](docs/EVALUATION.md)). The doctors shown in the app are fictional demo data.
 
-HealthMax has two parallel triage paths:
+## What it does
 
-- the FastAPI backend (`backend/`), which runs NER, disease retrieval,
-  classification, rules, and medicine lookup, and returns structured
-  Bangla triage results
-- the Lovable app's own **client-side** triage engine
-  (`healthmax-ai-assistant/src/lib/browserTriage.ts`), a TypeScript
-  reimplementation of the same NER/RAG/classifier/rules pipeline that
-  runs entirely in the browser
+A person describes their symptoms in Bangla, by typing or speaking. HealthMax:
 
-As of the current `Triage.tsx`, the `/triage` page calls
-`runBrowserTriage()` directly — it does **not** call the FastAPI
-backend. The two pipelines are logically equivalent but are
-maintained as separate codebases, so a fix made in one (e.g. a rules
-bug) must be mirrored in the other.
+1. extracts the symptoms with a fine-tuned **BanglaBERT** medical NER model;
+2. ranks likely conditions using **disease retrieval + an XGBoost classifier + safety rules**;
+3. asks up to three rounds of **targeted follow-up questions** to narrow it down;
+4. returns an **urgency level** (emergency / urgent / self-care), the level of care to go to (community clinic → upazila health complex → district hospital) and a specialist.
 
-What is **not** finished yet:
+The same pipeline runs as a **FastAPI service** (with Whisper-Bangla speech input and a WhatsApp webhook) and **entirely in the browser**, so the hosted demo needs no server.
 
-- hosted Supabase validation
-- WhatsApp / voice end-to-end validation
-- future public hosting choice, if needed
-- gold-label NER data
-- higher-quality disease ranking on ambiguous fever cases
-- reconciling the backend and browser triage pipelines into one path
+| Follow-up questions | Emergency override | Mobile |
+|---|---|---|
+| <img src="docs/images/triage-followup.png" width="300"> | <img src="docs/images/triage-emergency.png" width="300"> | <img src="docs/images/triage-mobile.png" width="240"> |
 
-## What works now
+<sub>Screenshots of the shipped hackathon build (Bangla UI), captured 2026-10-02.</sub>
 
-### Local backend
+## Results (measured, not claimed)
 
-- `/health`
-- `/api/triage`
-- Bangla symptom extraction
-- disease mention detection
-- medicine mention detection
-- emergency rule override
-- DGDA medicine lookup
+| Component | Metric | Score | Source |
+|---|---|---|---|
+| Bangla medical NER (BanglaBERT, 3 entity types) | F1 on the silver-label validation set | **0.790** | [`models/ner_training_summary.json`](models/ner_training_summary.json) |
+| Disease classifier (XGBoost, 85 diseases) | Macro F1 on held-out rows | **0.726** | [`models/training_summary.json`](models/training_summary.json) |
+| Full triage engine | Urgency accuracy on 50 Bangla vignettes | **46%** | [`docs/EVALUATION.md`](docs/EVALUATION.md) |
+| Full triage engine | Emergency recall | **53%** | [`tests/results/triage_benchmark.json`](tests/results/triage_benchmark.json) |
 
-### Local Lovable app
+The parts score reasonably well, but the whole system does not. Most of the reason is the data: 757 rows of symptom presence, with no severity or duration and no self-care labels. The [post-mortem](docs/POSTMORTEM.md) explains this, along with why we stopped.
 
-- the Lovable `/triage` page runs `runBrowserTriage()` client-side
-- model-backed results render in the browser
-- the app can show:
-  - top diseases
-  - urgency
-  - facility recommendation
-  - medicine suggestions
+## Architecture
 
-## Canonical datasets
+```mermaid
+flowchart LR
+    A[Bangla text / voice] --> B[BanglaBERT NER<br/>+ alias lexicon]
+    B --> C[Retrieval<br/>85 disease records]
+    B --> D[XGBoost<br/>166 symptoms]
+    C --> E[Fusion]
+    D --> E
+    E --> F[Safety rules<br/>emergency override]
+    F --> G[Urgency · care level · specialist<br/>· follow-up questions]
+```
 
-### Disease classifier and disease retrieval
+Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · Models and data: [docs/MODELS_AND_DATA.md](docs/MODELS_AND_DATA.md)
 
-- `data/raw/Symptoms.csv`
+## Tech stack
 
-Used for:
+| Layer | Tools |
+|---|---|
+| ML / NLP | PyTorch, Hugging Face Transformers (BanglaBERT, Whisper-Bangla), XGBoost, scikit-learn, FAISS / TF-IDF, RapidFuzz |
+| Backend | FastAPI, Twilio (WhatsApp / voice), Google Cloud TTS, optional GPT-4o / Bedrock Claude for response text |
+| Web app | React 18, TypeScript, Vite, Tailwind, shadcn/ui, Web Speech API (`bn-BD`) |
+| Platform | Supabase (Postgres, auth and roles, Edge Functions), Vercel |
+| Evaluation | Vitest / vite-node benchmark harness |
 
-- XGBoost disease classifier
-- disease retrieval records
-- FAISS index
+## Run it locally
 
-### Medicine lookup
+```powershell
+# Web app (runs the in-browser engine; no backend needed)
+cd healthmax-ai-assistant
+npm install
+npm run dev            # http://localhost:8080/triage
 
-- `assets/medicine.csv`
+# Urgency benchmark
+npx vite-node ../tests/eval_triage.ts
 
-Used for:
+# Optional: Python service (Python 3.12)
+cd ..
+py -3.12 -m venv .venv; .\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python -m uvicorn backend.main:app --port 8000   # POST /api/triage
+```
 
-- DGDA brand / generic / price lookup
+Model training and reproduction steps: [docs/MODELS_AND_DATA.md](docs/MODELS_AND_DATA.md#reproducing).
 
-### Specialist routing
+## Brand kit
 
-- `healthmax-ai-assistant/src/data/specialist_classification.csv`
+After archiving, I designed a v1 brand kit as a design exercise. It addresses a real flaw in the shipped app: its crimson brand colour was nearly identical to its emergency red. The kit includes a mark (an H whose crossbar is a heartbeat, which also reads as *HM*), a WCAG-checked palette with a **reserved urgency scale**, Bangla-first typography, and UX rules for designing for a worried person.
 
-Used for:
+<p align="center"><img src="docs/images/redesign-result-card.png" width="320" alt="Redesigned result card: urgency and next step first"></p>
 
-- future specialist-routing model work
+[brand/README.md](brand/README.md) · [guideline page](brand/guidelines.html)
 
-### NER silver-label sources
+## What I learned
 
-- `data/raw/Symptoms.csv`
-- `healthmax-ai-assistant/src/data/medicine_ner_v2.csv`
-- `healthmax-ai-assistant/src/data/medicine_ner.csv`
-- `healthmax-ai-assistant/src/data/specialist_classification.csv`
+- **Do the market scan before writing code.** A direct competitor (AmarDoctor, with 1.4M clinic visits behind it) already existed.
+- **Triage is about urgency and where to go, not disease ranking.** We optimised the wrong output.
+- **Build the benchmark first.** Ours was broken by a CSV quoting bug, so quality went unmeasured until the end.
+- **One engine, not two.** The Python and TypeScript pipelines drifted apart.
+- **Demo shortcuts become product decisions:** medicine suggestions, "Final Diagnosis" labels, sponsored placeholder doctors.
 
-Used for:
+Full write-up: [docs/POSTMORTEM.md](docs/POSTMORTEM.md)
 
-- local silver-labeled Bangla medical NER training
-
-## Current trained artifacts and scores
-
-### Disease classifier
-
-Artifacts:
-
-- `models/disease_classifier.json`
-- `models/label_encoder.json`
-- `models/symptom_list.json`
-
-Score:
-
-- macro F1: `0.7255`
-
-### Disease retrieval / RAG
-
-Artifacts:
-
-- `models/disease_rag.index`
-- `models/disease_records.json`
-- `models/rag_config.json`
-
-Runtime:
-
-- sentence-transformer embeddings on CUDA
-- FAISS on CPU
-
-### Bangla medical NER
-
-Artifacts:
-
-- `models/ner-banglabert-medical/`
-- `models/ner_training_summary.json`
-
-Score:
-
-- validation F1: `0.7896`
-
-## Repository structure
+## Repository
 
 ```text
-HealthMax/
-├── backend/                     # FastAPI inference pipeline
-├── data/                        # training pipeline and raw/processed datasets
-├── models/                      # trained local artifacts
-├── training/                    # standalone model training scripts
-├── notebooks/                   # notebook experiments
-├── frontend/                    # legacy static demo
-├── healthmax-ai-assistant/      # Lovable app + Supabase functions
-├── PROJECT_SITUATION.md         # current repo/project reality
-├── tasks.md                     # current worklist
-└── README.md
+backend/                 FastAPI service: NER, retrieval, classifier, fusion, rules, ASR/TTS, medicine lookup
+healthmax-ai-assistant/  web app (submodule): React + Supabase, in-browser triage engine
+data/  training/  notebooks/   dataset processing, NER dataset builder, BanglaBERT fine-tuning
+models/                  trained artifacts (large weights gitignored)
+tests/                   vignette benchmark (eval_triage.ts) and results
+brand/                   brand kit v1
+docs/                    architecture, models & data, evaluation, post-mortem, archive
 ```
 
-## Local run
+## Credits
 
-### Python version first
+- Built by [@jawatalsovon](https://github.com/jawatalsovon) and [@Shafin2954](https://github.com/Shafin2954) for the Harvard HSIL Hackathon 2026.
+- Symptoms–disease dataset: Zannat, Al Shafi & Muntakim, *Bridging the Gap in Bangla Healthcare*, ECCE 2025 ([arXiv:2601.12068](https://arxiv.org/abs/2601.12068), [Mendeley](https://data.mendeley.com/datasets/rjgjh8hgrt/6)).
+- Base models: [`sagorsarker/bangla-bert-base`](https://huggingface.co/sagorsarker/bangla-bert-base), [`asif00/whisper-bangla`](https://huggingface.co/asif00/whisper-bangla).
+- Medicine data: Bangladesh DGDA registry.
+- Fonts: Anek Bangla, Noto Sans Bengali, Inter (SIL OFL).
 
-Use `Python 3.12` for this pinned backend stack.
+## License
 
-If you try `Python 3.13`, install can fail on `torch==2.3.0` and possibly other pinned ML wheels.
-
-Recommended Windows setup:
-
-```powershell
-py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-### 1. Start the backend (optional — the Lovable app no longer calls it)
-
-From the repo root:
-
-```powershell
-python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
-```
-
-### 2. Start the Lovable app
-
-From `healthmax-ai-assistant`:
-
-```powershell
-npm run dev
-```
-
-The dev server runs on port `8080` (set in `vite.config.ts`), not Vite's
-default `5173`.
-
-### 3. Open in browser
-
-- backend health (if running): `http://127.0.0.1:8000/health`
-- Lovable triage page: `http://127.0.0.1:8080/triage`
-
-If you run preview instead of dev, Vite still serves it on `8080`
-unless overridden.
-
-### 4. Verify the triage pipeline
-
-The `/triage` page runs `runBrowserTriage()` from
-`src/lib/browserTriage.ts` entirely client-side — no network call to
-the FastAPI backend is involved. Submit a triage prompt and check the
-rendered result contains:
-
-- matched symptoms/diseases
-- `urgency_level`
-- a facility recommendation
-- medicine suggestions
-
-To exercise the FastAPI backend's equivalent pipeline instead (e.g.
-for the WhatsApp/voice paths, which do use it), call
-`POST http://127.0.0.1:8000/api/triage` directly and check for
-`ner_entities`, `top_diseases`, `urgency_level`, `medicines`.
-
-## Example manual test prompts
-
-- `বুকে ব্যথা হচ্ছে এবং শ্বাস নিতে কষ্ট হচ্ছে।`
-  Expected: emergency guidance
-
-- `আমার ডায়রিয়া, পেট ব্যথা আর পানিশূন্যতা হচ্ছে।`
-  Expected: urgent gastro/cholera-like ranking
-
-- `আমার বাচ্চার হাম হয়েছে মনে হচ্ছে।`
-  Expected: `হাম` near the top
-
-- `আমার কয়েকদিন ধরে জ্বর, চোখের পেছনে ব্যথা, গায়ে ব্যথা আর বমি বমি লাগছে।`
-  Expected: `ডেঙ্গু` and/or `ম্যালেরিয়া` near the top
-
-## Collaborator guide
-
-The project is no longer at the “implement the skeleton” stage. The main work now is **quality, evaluation, and hosted integration**.
-
-### Workstream A: Disease ranking quality
-
-Needed:
-
-- improve dengue / malaria / flu-like separation
-- tune hybrid ranking weights
-- improve Bangla symptom normalization
-- reduce weak tied predictions in low-signal cases
-
-Best files:
-
-- `backend/fusion.py`
-- `backend/classifier.py`
-- `backend/rag.py`
-- `backend/main.py`
-
-### Workstream B: Evaluation and benchmarks
-
-Needed:
-
-- build a saved benchmark prompt set
-- define expected top-3 results for common cases
-- add regression checks so ranking quality does not drift
-
-Best files:
-
-- `tasks.md`
-- `models/training_summary.json`
-- new files under `tests/`
-
-### Workstream C: NER quality
-
-Needed:
-
-- replace silver labels with a reviewed gold BIO dataset
-- improve per-entity quality for symptom / disease / medicine tags
-- add stronger NER evaluation by entity type
-
-Best files:
-
-- `data/build_ner_dataset.py`
-- `training/train_ner.py`
-- `backend/ner.py`
-- `notebooks/banglabert_finetune.ipynb`
-
-### Workstream D: Supabase and hosted integration
-
-Needed:
-
-- import datasets into Supabase tables
-- point hosted Edge Functions to a reachable backend URL
-- validate the hosted Lovable app path
-
-Best files:
-
-- `healthmax-ai-assistant/src/pages/Triage.tsx`
-- `healthmax-ai-assistant/supabase/functions/healthmax-triage/index.ts`
-- `healthmax-ai-assistant/src/pages/AdminImport.tsx`
-
-### Workstream E: Voice and messaging
-
-Needed:
-
-- stabilize Twilio WhatsApp flow
-- validate voice path against the current backend
-- decide when ASR becomes a true training priority
-
-Best files:
-
-- `backend/asr.py`
-- `backend/main.py`
-- `healthmax-ai-assistant/supabase/functions/twilio-whatsapp/index.ts`
-- `healthmax-ai-assistant/supabase/functions/twilio-voice/index.ts`
-
-## Collaboration rules
-
-- Do not weaken emergency rules without explicit review
-- Keep the local model-to-app path working
-- Prefer canonical datasets already in use
-- Record metric changes when retraining models
-- Do not assume AWS is the next step; local quality and hosted validation come first, and any public hosting choice stays future-only for now
-
-## Important files to read first
-
-- `PROJECT_SITUATION.md`
-- `tasks.md`
-- `backend/main.py`
-- `backend/fusion.py`
-- `backend/ner.py`
-- `data/process_datasets.py`
-
-## Bottom line
-
-HealthMax is now a working local prototype with real trained artifacts and real browser integration.
-
-The next milestone is:
-
-- better prediction quality
-- stronger evaluation
-- hosted Supabase/Lovable validation
+Code: [MIT](LICENSE). Datasets, base models and fonts keep their own licenses (listed in [LICENSE](LICENSE)). Not a medical device, and nothing here is medical advice.

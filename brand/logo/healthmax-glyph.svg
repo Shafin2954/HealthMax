@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="12 10 40 44" role="img" aria-label="HealthMax">
+  <path d="M19 15v34M45 15v34" fill="none" stroke="#0B4F6C" stroke-width="6" stroke-linecap="round"/>
+  <path d="M19 33h7l4.5-12 5.5 22 4-10h5" fill="none" stroke="#0B4F6C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="30.5" cy="21" r="3.4" fill="#B8487A"/>
+</svg>

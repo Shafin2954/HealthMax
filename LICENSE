@@ -1,0 +1,38 @@
+MIT License
+
+Copyright (c) 2026 HealthMax contributors (jawatalsovon, Shafin2954)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+Third-party data and models are NOT covered by this license and remain under
+their own terms:
+
+- Bangla symptoms-disease dataset (data/raw/Symptoms.csv, assets/Symptoms.csv,
+  assets/Symptom Arxiv.pdf): Zannat, Al Shafi & Muntakim, arXiv:2601.12068,
+  published on Mendeley Data (doi:10.17632/rjgjh8hgrt.6) under its own license.
+- Medicine list (assets/medicine.csv and derived files): Bangladesh DGDA registry data.
+- Base models referenced or fine-tuned (sagorsarker/bangla-bert-base,
+  asif00/whisper-bangla): see their Hugging Face model cards.
+- Fonts used by the brand kit (Anek Bangla, Noto Sans Bengali, Inter):
+  SIL Open Font License 1.1.
+
+HealthMax is a research prototype and is not a medical device. Nothing in this
+repository is medical advice.

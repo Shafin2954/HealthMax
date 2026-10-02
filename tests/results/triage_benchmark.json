@@ -1,0 +1,479 @@
+{
+  "summary": {
+    "engine": "healthmax-ai-assistant/src/lib/browserTriage.ts",
+    "cases": 50,
+    "urgency_accuracy": 0.46,
+    "emergency_recall": 0.529,
+    "under_triage_rate": 0.38,
+    "over_triage_rate": 0.16,
+    "confusion_expected_by_predicted": {
+      "EMERGENCY": {
+        "EMERGENCY": 9,
+        "URGENT": 2,
+        "SELF-CARE": 6
+      },
+      "URGENT": {
+        "EMERGENCY": 0,
+        "URGENT": 10,
+        "SELF-CARE": 11
+      },
+      "SELF-CARE": {
+        "EMERGENCY": 0,
+        "URGENT": 8,
+        "SELF-CARE": 4
+      }
+    }
+  },
+  "details": [
+    {
+      "id": 1,
+      "input": "বুকে ব্যথা, শ্বাস কষ্ট",
+      "expected": "EMERGENCY",
+      "predicted": "EMERGENCY",
+      "outcome": "correct",
+      "top_disease": "নিমোনিয়া (Pneumonia)",
+      "note": "Cardiac emergency — rule must override to EMERGENCY"
+    },
+    {
+      "id": 2,
+      "input": "তিন দিন জ্বর, মাথাব্যথা, চোখ লাল, গা ব্যথা",
+      "expected": "URGENT",
+      "predicted": "URGENT",
+      "outcome": "correct",
+      "top_disease": "পোলিও (Polio)",
+      "note": "Dengue / Typhoid presentation"
+    },
+    {
+      "id": 3,
+      "input": "পেটব্যথা, বমি, পাতলা পায়খানা",
+      "expected": "URGENT",
+      "predicted": "URGENT",
+      "outcome": "correct",
+      "top_disease": "হেপাটাইটিস এ (Hepatitis A)",
+      "note": "Gastroenteritis"
+    },
+    {
+      "id": 4,
+      "input": "হাত পা কাঁপছে, ঘাম হচ্ছে, মাথা ঘুরছে",
+      "expected": "URGENT",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Hypoglycemia"
+    },
+    {
+      "id": 5,
+      "input": "গলা ব্যথা, সর্দি, হালকা জ্বর",
+      "expected": "SELF-CARE",
+      "predicted": "URGENT",
+      "outcome": "over-triage",
+      "top_disease": "সোয়াইন ফ্লু (Swine Flu)",
+      "note": "Upper respiratory — no danger signs"
+    },
+    {
+      "id": 6,
+      "input": "অজ্ঞান হয়ে গেছে",
+      "expected": "EMERGENCY",
+      "predicted": "EMERGENCY",
+      "outcome": "correct",
+      "top_disease": null,
+      "note": "Loss of consciousness"
+    },
+    {
+      "id": 7,
+      "input": "খিঁচুনি হচ্ছে",
+      "expected": "EMERGENCY",
+      "predicted": "EMERGENCY",
+      "outcome": "correct",
+      "top_disease": "জলাতঙ্ক (Rabies)",
+      "note": "Seizure"
+    },
+    {
+      "id": 8,
+      "input": "সাপে কেটেছে",
+      "expected": "EMERGENCY",
+      "predicted": "EMERGENCY",
+      "outcome": "correct",
+      "top_disease": null,
+      "note": "Snakebite"
+    },
+    {
+      "id": 9,
+      "input": "প্রচুর রক্ত পড়ছে",
+      "expected": "EMERGENCY",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Heavy bleeding"
+    },
+    {
+      "id": 10,
+      "input": "শিশুর তীব্র জ্বর এবং খিঁচুনি",
+      "expected": "EMERGENCY",
+      "predicted": "EMERGENCY",
+      "outcome": "correct",
+      "top_disease": "এনসেফালাইটিস (Encephalitis)",
+      "note": "Febrile seizure in infant"
+    },
+    {
+      "id": 11,
+      "input": "দুই দিন ধরে পাতলা পায়খানা, একটু দুর্বল",
+      "expected": "URGENT",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Diarrhea with weakness — dehydration risk"
+    },
+    {
+      "id": 12,
+      "input": "বুক ব্যাথা, ঘাম হচ্ছে",
+      "expected": "EMERGENCY",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Possible MI"
+    },
+    {
+      "id": 13,
+      "input": "মাথায় আঘাত পেয়েছে, মাথা ঘুরছে",
+      "expected": "URGENT",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Head trauma"
+    },
+    {
+      "id": 14,
+      "input": "হালকা কাশি, নাক দিয়ে পানি পড়ছে",
+      "expected": "SELF-CARE",
+      "predicted": "URGENT",
+      "outcome": "over-triage",
+      "top_disease": "নিমোনিয়া (Pneumonia)",
+      "note": "Common cold"
+    },
+    {
+      "id": 15,
+      "input": "বমিতে রক্ত",
+      "expected": "EMERGENCY",
+      "predicted": "EMERGENCY",
+      "outcome": "correct",
+      "top_disease": "গ্লুকোমা (Glaucoma)",
+      "note": "Hematemesis — upper GI bleed"
+    },
+    {
+      "id": 16,
+      "input": "পায়খানায় রক্ত",
+      "expected": "URGENT",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Lower GI bleed"
+    },
+    {
+      "id": 17,
+      "input": "চোখ হলুদ, প্রস্রাব হলুদ",
+      "expected": "URGENT",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Jaundice / Hepatitis"
+    },
+    {
+      "id": 18,
+      "input": "হাঁটু ব্যথা, কিছুদিন ধরে",
+      "expected": "SELF-CARE",
+      "predicted": "SELF-CARE",
+      "outcome": "correct",
+      "top_disease": null,
+      "note": "Chronic knee pain — non-emergency"
+    },
+    {
+      "id": 19,
+      "input": "তীব্র পেট ব্যথা, বমি হচ্ছে",
+      "expected": "URGENT",
+      "predicted": "URGENT",
+      "outcome": "correct",
+      "top_disease": "হেপাটাইটিস এ (Hepatitis A)",
+      "note": "Acute abdomen"
+    },
+    {
+      "id": 20,
+      "input": "শ্বাস নিতে পারছি না",
+      "expected": "EMERGENCY",
+      "predicted": "EMERGENCY",
+      "outcome": "correct",
+      "top_disease": null,
+      "note": "Respiratory distress"
+    },
+    {
+      "id": 21,
+      "input": "ডায়াবেটিস আছে, অনেক দুর্বল",
+      "expected": "URGENT",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Diabetic complication"
+    },
+    {
+      "id": 22,
+      "input": "জলে পড়ে যাওয়ার পরে শ্বাস কষ্ট",
+      "expected": "EMERGENCY",
+      "predicted": "EMERGENCY",
+      "outcome": "correct",
+      "top_disease": null,
+      "note": "Near-drowning"
+    },
+    {
+      "id": 23,
+      "input": "গলা ফুলে গেছে, শ্বাস নিতে কষ্ট",
+      "expected": "EMERGENCY",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Anaphylaxis / angioedema"
+    },
+    {
+      "id": 24,
+      "input": "মুখ বাঁকা হয়ে গেছে, কথা জড়িয়ে যাচ্ছে",
+      "expected": "EMERGENCY",
+      "predicted": "EMERGENCY",
+      "outcome": "correct",
+      "top_disease": "স্ক্লেরোসিস (Sclerosis)",
+      "note": "Stroke signs"
+    },
+    {
+      "id": 25,
+      "input": "হাত অবশ হয়ে গেছে",
+      "expected": "URGENT",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Neurological — could be TIA or pressure"
+    },
+    {
+      "id": 26,
+      "input": "বিষ খেয়েছে",
+      "expected": "EMERGENCY",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Poisoning"
+    },
+    {
+      "id": 27,
+      "input": "পোকার কামড়, ফুলে গেছে",
+      "expected": "URGENT",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Insect sting with swelling"
+    },
+    {
+      "id": 28,
+      "input": "কুকুরে কামড়েছে",
+      "expected": "EMERGENCY",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Rabies exposure — immediate care"
+    },
+    {
+      "id": 29,
+      "input": "কানে ব্যথা",
+      "expected": "SELF-CARE",
+      "predicted": "URGENT",
+      "outcome": "over-triage",
+      "top_disease": "ওটিটিস মিডিয়া (Otitis Media)",
+      "note": "Ear pain without danger signs"
+    },
+    {
+      "id": 30,
+      "input": "পিঠে ব্যথা, কয়েকদিন ধরে",
+      "expected": "SELF-CARE",
+      "predicted": "URGENT",
+      "outcome": "over-triage",
+      "top_disease": "গুটিবসন্ত (Smallpox)",
+      "note": "Low back pain — chronic"
+    },
+    {
+      "id": 31,
+      "input": "ঘুমাতে পারছি না, মন খারাপ",
+      "expected": "SELF-CARE",
+      "predicted": "SELF-CARE",
+      "outcome": "correct",
+      "top_disease": null,
+      "note": "Mental health — non-emergency unless suicidal ideation"
+    },
+    {
+      "id": 32,
+      "input": "গর্ভবতী, প্রচণ্ড পেটব্যথা",
+      "expected": "EMERGENCY",
+      "predicted": "URGENT",
+      "outcome": "under-triage",
+      "top_disease": "পোলিও (Polio)",
+      "note": "Obstetric emergency"
+    },
+    {
+      "id": 33,
+      "input": "চোখে ব্যথা, দেখতে পাচ্ছি না",
+      "expected": "URGENT",
+      "predicted": "URGENT",
+      "outcome": "correct",
+      "top_disease": "ট্র্যাকোমা (Trachoma)",
+      "note": "Visual disturbance"
+    },
+    {
+      "id": 34,
+      "input": "কাশিতে রক্ত",
+      "expected": "URGENT",
+      "predicted": "URGENT",
+      "outcome": "correct",
+      "top_disease": "নিমোনিয়া (Pneumonia)",
+      "note": "Hemoptysis — TB / pneumonia concern"
+    },
+    {
+      "id": 35,
+      "input": "হঠাৎ মাথাব্যথা, সবচেয়ে খারাপ",
+      "expected": "EMERGENCY",
+      "predicted": "URGENT",
+      "outcome": "under-triage",
+      "top_disease": "ওটিটিস মিডিয়া (Otitis Media)",
+      "note": "Thunderclap headache — SAH"
+    },
+    {
+      "id": 36,
+      "input": "উচ্চ রক্তচাপ, মাথাব্যথা",
+      "expected": "URGENT",
+      "predicted": "URGENT",
+      "outcome": "correct",
+      "top_disease": "উচ্চ রক্তচাপ (High Blood Pressure)",
+      "note": "Hypertensive urgency"
+    },
+    {
+      "id": 37,
+      "input": "বাচ্চা খাচ্ছে না, কান্না থামছে না",
+      "expected": "URGENT",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Unwell infant — needs evaluation"
+    },
+    {
+      "id": 38,
+      "input": "জ্বর ৩ দিন, চোখ লাল, গায়ে র‍্যাশ",
+      "expected": "URGENT",
+      "predicted": "URGENT",
+      "outcome": "correct",
+      "top_disease": "ইমপেটিগো (Impetigo)",
+      "note": "Dengue suspect — Day 3"
+    },
+    {
+      "id": 39,
+      "input": "ঠান্ডা লেগেছে, গলা ব্যথা",
+      "expected": "SELF-CARE",
+      "predicted": "URGENT",
+      "outcome": "over-triage",
+      "top_disease": "পোলিও (Polio)",
+      "note": "Common cold — self-care"
+    },
+    {
+      "id": 40,
+      "input": "গা চুলকাচ্ছে, র‍্যাশ",
+      "expected": "SELF-CARE",
+      "predicted": "URGENT",
+      "outcome": "over-triage",
+      "top_disease": "ইমপেটিগো (Impetigo)",
+      "note": "Pruritus / rash without danger signs"
+    },
+    {
+      "id": 41,
+      "input": "বুক ধড়ফড় করছে",
+      "expected": "URGENT",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Palpitations — cardiac evaluation needed"
+    },
+    {
+      "id": 42,
+      "input": "প্রস্রাবে জ্বালা, ঘন ঘন প্রস্রাব",
+      "expected": "SELF-CARE",
+      "predicted": "SELF-CARE",
+      "outcome": "correct",
+      "top_disease": null,
+      "note": "UTI — outpatient treatment"
+    },
+    {
+      "id": 43,
+      "input": "পেটে গ্যাস, বদহজম",
+      "expected": "SELF-CARE",
+      "predicted": "URGENT",
+      "outcome": "over-triage",
+      "top_disease": "পেপটিক আলসার (Peptic Ulcer)",
+      "note": "Dyspepsia"
+    },
+    {
+      "id": 44,
+      "input": "ব্রণ, মুখে দাগ",
+      "expected": "SELF-CARE",
+      "predicted": "URGENT",
+      "outcome": "over-triage",
+      "top_disease": "ব্রণ (Acne)",
+      "note": "Acne — cosmetic concern"
+    },
+    {
+      "id": 45,
+      "input": "দাঁতে ব্যথা",
+      "expected": "SELF-CARE",
+      "predicted": "SELF-CARE",
+      "outcome": "correct",
+      "top_disease": null,
+      "note": "Dental pain — refer to dentist"
+    },
+    {
+      "id": 46,
+      "input": "পা ভেঙেছে সম্ভবত, অনেক ব্যথা",
+      "expected": "URGENT",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Suspected fracture"
+    },
+    {
+      "id": 47,
+      "input": "জ্বর নেই কিন্তু পেটব্যথা আছে ৫ দিন ধরে",
+      "expected": "URGENT",
+      "predicted": "URGENT",
+      "outcome": "correct",
+      "top_disease": "পোলিও (Polio)",
+      "note": "Chronic abdomen pain — needs evaluation"
+    },
+    {
+      "id": 48,
+      "input": "মাথা ঘুরছে, বমি বমি ভাব",
+      "expected": "URGENT",
+      "predicted": "URGENT",
+      "outcome": "correct",
+      "top_disease": "গ্লুকোমা (Glaucoma)",
+      "note": "Vertigo / early dehydration"
+    },
+    {
+      "id": 49,
+      "input": "শিশুর বমি ও পাতলা পায়খানা, দুর্বল",
+      "expected": "URGENT",
+      "predicted": "URGENT",
+      "outcome": "correct",
+      "top_disease": "গ্লুকোমা (Glaucoma)",
+      "note": "Pediatric gastroenteritis — dehydration risk"
+    },
+    {
+      "id": 50,
+      "input": "নিঃশ্বাস বন্ধ হয়ে গেছে",
+      "expected": "EMERGENCY",
+      "predicted": "SELF-CARE",
+      "outcome": "under-triage",
+      "top_disease": null,
+      "note": "Respiratory arrest"
+    }
+  ]
+}

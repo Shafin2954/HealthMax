@@ -1,0 +1,43 @@
+/* HealthMax design tokens v1 (2026-10-02). Source of truth: brand/README.md */
+:root {
+  /* Brand palette */
+  --hm-petrol: #0B4F6C;      /* primary: calm, trustworthy, never alarming */
+  --hm-ink: #10222B;         /* text */
+  --hm-mist: #E6F0F3;        /* surfaces, cards */
+  --hm-rice: #F7F5F0;        /* page ground: warm, not clinical white */
+  --hm-shapla: #B8487A;      /* accent for brand moments only, never for state */
+  --hm-slate: #4A5E66;       /* secondary text */
+
+  /* Urgency scale: reserved for triage state, never decorative */
+  --hm-emergency: #B42318;  --hm-emergency-bg: #FDECEA;
+  --hm-urgent: #7A4600;     --hm-urgent-bg: #FFF1D6;   --hm-urgent-dot: #E8A100;
+  --hm-selfcare: #1F6F43;   --hm-selfcare-bg: #E3F4EA;
+
+  /* Type */
+  --hm-font-display: "Anek Bangla", "Noto Sans Bengali", system-ui, sans-serif;
+  --hm-font-bn: "Noto Sans Bengali", "Anek Bangla", system-ui, sans-serif;
+  --hm-font-en: "Inter", system-ui, sans-serif;
+  --hm-text-base: 17px;      /* Bangla needs ~1.1x the Latin size to read equally */
+  --hm-leading-bn: 1.7;
+  --hm-leading-en: 1.5;
+
+  /* Shape */
+  --hm-radius-s: 8px;  --hm-radius-m: 14px;  --hm-radius-l: 22px;
+  --hm-tap: 48px;            /* minimum touch target */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --hm-petrol: #6CC0DE; --hm-ink: #E8F0F2; --hm-mist: #15262E; --hm-rice: #0D1A20;
+    --hm-shapla: #E58AB3; --hm-slate: #9AB0B8;
+    --hm-emergency: #FF8A80; --hm-emergency-bg: #3A1512;
+    --hm-urgent: #FFC861;    --hm-urgent-bg: #3A2A0B;
+    --hm-selfcare: #7FD6A3;  --hm-selfcare-bg: #0F2E1D;
+  }
+}
+:root[data-theme="dark"] {
+  --hm-petrol: #6CC0DE; --hm-ink: #E8F0F2; --hm-mist: #15262E; --hm-rice: #0D1A20;
+  --hm-shapla: #E58AB3; --hm-slate: #9AB0B8;
+  --hm-emergency: #FF8A80; --hm-emergency-bg: #3A1512;
+  --hm-urgent: #FFC861;    --hm-urgent-bg: #3A2A0B;
+  --hm-selfcare: #7FD6A3;  --hm-selfcare-bg: #0F2E1D;
+}
